@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'api_service.dart';
+import 'achievements_page.dart';
 
 class MonthlyChart extends StatefulWidget {
   final String userId;
@@ -36,16 +37,42 @@ class _MonthlyChartState extends State<MonthlyChart> {
     });
   }
 
+  void openAchievementsPage() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => AchievementsPage(userId: widget.userId),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('Monthly Waste Log')),
       body: Column(
         children: [
-          if (monthlySummary != null)
-            Expanded(child: buildMonthlyBarChart()),
+          if (monthlySummary != null) Expanded(child: buildMonthlyBarChart()),
           if (categorySummary != null && selectedMonth != null)
             Expanded(child: buildCategoryBarChart()),
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: ElevatedButton.icon(
+              onPressed: openAchievementsPage,
+              icon: const Icon(Icons.emoji_events),
+              label: const Text(
+                'Achievements',
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+              ),
+              style: ElevatedButton.styleFrom(
+                padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 20),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                backgroundColor: Colors.green,
+              ),
+            ),
+          ),
         ],
       ),
     );
