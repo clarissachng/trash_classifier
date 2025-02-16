@@ -33,24 +33,46 @@ class _ScanPageState extends State<ScanPage> {
   }
 
   @override
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Scan My Waste"),
         backgroundColor: Colors.black,
       ),
-      body: _controller == null || !_controller!.value.isInitialized
-          ? const Center(child: CircularProgressIndicator())
-          : Column(
+      body: Stack(
         children: [
-          Expanded(
-            child: CameraPreview(_controller!),
+          // Camera Preview
+          Positioned.fill(
+            child: _controller == null || !_controller!.value.isInitialized
+                ? const Center(child: CircularProgressIndicator())
+                : CameraPreview(_controller!),
           ),
-          Padding(
-            padding: const EdgeInsets.all(20.0),
+
+          // Capture Button
+          Positioned(
+            bottom: 80, // Adjust this value if needed
+            left: 20, // Centers the button
+            right: 20,
             child: ElevatedButton(
               onPressed: () {},
-              child: const Text("Capture"),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.black,
+                padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 40),
+              ),
+              child: const Text("Capture", style: TextStyle(fontSize: 18, color: Colors.white)),
+            ),
+          ),
+
+          // Settings Button (Bottom Left)
+          Positioned(
+            bottom: 20,
+            left: 20,
+            child: IconButton(
+              icon: Image.asset('assets/icon/settings-icon.png', height: 40), // Ensure image exists
+              onPressed: () {
+                // Open settings or navigate to settings page
+              },
             ),
           ),
         ],

@@ -100,7 +100,7 @@ class MainPage extends StatelessWidget {
                       ),
                     ),
                   ),
-                  _buildButton("Scan my waste", context, 'scan_page'),
+                  _buildButton("Scan my waste", context, '/scan_page'),
                   _buildButton("Waste Overview", context),
                   _buildButton("Tips/Fun facts", context),
 
