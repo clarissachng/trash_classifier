@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'screens/scan_page.dart';
-import 'monthly_chart.dart';
-import 'achievements.dart';
+import 'overview_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -21,8 +20,7 @@ class MyApp extends StatelessWidget {
       routes: {
         '/': (context) => const MainPage(),
         '/scan_page': (context) => const ScanPage(),
-        '/monthly_chart': (context) => MonthlyChart(userId: 'test_user'),
-        '/achievements_page': (context) => AchievementsPage(userId: 'test_user'),
+        '/overview_page': (context) => OverviewPage(userId: 'test_user'),
       },
     );
   }
@@ -105,7 +103,7 @@ class MainPage extends StatelessWidget {
                     ),
                   ),
                   _buildButton("Scan my waste", context, '/scan_page'),
-                  _buildButton("Waste Overview", context, '/monthly_chart'),
+                  _buildButton("Waste Overview", context, '/overview_page'),
                   _buildButton("Tips/Fun facts", context),
 
                   const Spacer(),
