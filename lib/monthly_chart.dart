@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'api_service.dart';
-import 'achievements_page.dart';
+import 'achievements.dart';
 
 class MonthlyChart extends StatefulWidget {
   final String userId;
@@ -38,11 +38,9 @@ class _MonthlyChartState extends State<MonthlyChart> {
   }
 
   void openAchievementsPage() {
-    Navigator.push(
+    Navigator.pushNamed(
       context,
-      MaterialPageRoute(
-        builder: (context) => AchievementsPage(userId: widget.userId),
-      ),
+      '/achievements_page',
     );
   }
 
@@ -99,14 +97,19 @@ class _MonthlyChartState extends State<MonthlyChart> {
                       borderRadius: BorderRadius.circular(4),
                     )
                   ],
-                  showingTooltipIndicators: [0],
                 );
               }).toList(),
               titlesData: FlTitlesData(
-                leftTitles: SideTitles(showTitles: true, interval: 5),
-                bottomTitles: SideTitles(
-                  showTitles: true,
-                  getTitles: (value) => value.toInt().toString(),
+                leftTitles: AxisTitles(
+                  sideTitles: SideTitles(showTitles: true, interval: 5),
+                ),
+                bottomTitles: AxisTitles(
+                  sideTitles: SideTitles(
+                    showTitles: true,
+                    getTitlesWidget: (value, meta) {
+                      return Text(value.toInt().toString());
+                    },
+                  ),
                 ),
               ),
               barTouchData: BarTouchData(
@@ -149,12 +152,16 @@ class _MonthlyChartState extends State<MonthlyChart> {
                 );
               }).toList(),
               titlesData: FlTitlesData(
-                leftTitles: SideTitles(showTitles: true, interval: 2),
-                bottomTitles: SideTitles(
-                  showTitles: true,
-                  getTitles: (value) =>
-                      categorySummary!.keys.elementAt(value.toInt()),
-                  rotateAngle: 60,
+                leftTitles: AxisTitles(
+                  sideTitles: SideTitles(showTitles: true, interval: 2),
+                ),
+                bottomTitles: AxisTitles(
+                  sideTitles: SideTitles(
+                    showTitles: true,
+                    getTitlesWidget: (value, meta) {
+                      return Text(categorySummary!.keys.elementAt(value.toInt()));
+                    },
+                  ),
                 ),
               ),
             ),
