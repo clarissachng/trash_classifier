@@ -1,1 +1,1 @@
-# AI-Powered-Trash-Classifier
+# AI_Powered_Trash_Classifier
