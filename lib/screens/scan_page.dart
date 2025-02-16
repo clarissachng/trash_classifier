@@ -33,7 +33,6 @@ class _ScanPageState extends State<ScanPage> {
   }
 
   @override
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -42,16 +41,35 @@ class _ScanPageState extends State<ScanPage> {
       ),
       body: Stack(
         children: [
-          // Camera Preview
-          Positioned.fill(
-            child: _controller == null || !_controller!.value.isInitialized
-                ? const Center(child: CircularProgressIndicator())
-                : CameraPreview(_controller!),
+          // Centered Camera Preview
+          // Positioned Camera Preview
+          Positioned(
+            top: MediaQuery.of(context).size.height * 0.1, // Adjust to move up/down
+            left: MediaQuery.of(context).size.width * 0.1,
+            right: MediaQuery.of(context).size.width * 0.1,
+            child: Align(
+              alignment: Alignment.center,
+              child: Container(
+                width: MediaQuery.of(context).size.width * 0.8, // 80% of screen width
+                height: MediaQuery.of(context).size.height * 0.5, // 50% of screen height
+                decoration: BoxDecoration(
+                  border: Border.all(color: Colors.black, width: 2),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: _controller == null || !_controller!.value.isInitialized
+                    ? const Center(child: CircularProgressIndicator())
+                    : ClipRRect(
+                  borderRadius: BorderRadius.circular(10),
+                  child: CameraPreview(_controller!),
+                ),
+              ),
+            ),
           ),
+
 
           // Capture Button
           Positioned(
-            bottom: 80, // Adjust this value if needed
+            top: MediaQuery.of(context).size.height * 0.50,
             left: 20, // Centers the button
             right: 20,
             child: ElevatedButton(
@@ -60,7 +78,7 @@ class _ScanPageState extends State<ScanPage> {
                 backgroundColor: Colors.black,
                 padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 40),
               ),
-              child: const Text("Capture", style: TextStyle(fontSize: 18, color: Colors.white)),
+              child: const Text("Scan My Waste", style: TextStyle(fontSize: 18, color: Colors.white)),
             ),
           ),
 
