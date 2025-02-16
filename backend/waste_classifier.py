@@ -3,8 +3,8 @@ import torchvision.transforms as transforms
 import io
 from PIL import Image
 
-# Load EfficientNetV2-B1 TorchScript model
-model = torch.jit.load('models/efficientnetv2_b1_waste_model.pt')
+# Load EfficientNetV2-B1 model from .pth file
+model = torch.load('models/efficientnetv2_b1_waste_model.pth')
 model.eval()
 
 # Image transformations

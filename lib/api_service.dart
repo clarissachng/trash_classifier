@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 import 'package:http/http.dart' as http;
 
 class ApiService {
@@ -39,6 +40,29 @@ class ApiService {
       }
     } catch (e) {
       print('Error fetching achievements: $e');
+      return null;
+    }
+  }
+
+  // Submit waste scan to backend (.pth model compatible)
+  Future<Map<String, dynamic>?> submitScan(String userId, File imageFile) async {
+    try {
+      var request = http.MultipartRequest('POST', Uri.parse('$apiUrl/scan'));
+      request.fields['user_id'] = userId;
+      request.files.add(
+        await http.MultipartFile.fromPath('image', imageFile.path),
+      );
+
+      var response = await request.send();
+      if (response.statusCode == 200) {
+        var responseData = await response.stream.bytesToString();
+        return jsonDecode(responseData);
+      } else {
+        print('Failed to submit scan: ${response.statusCode}');
+        return null;
+      }
+    } catch (e) {
+      print('Error during scan submission: $e');
       return null;
     }
   }
