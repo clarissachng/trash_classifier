@@ -86,7 +86,8 @@ class MainPage extends StatelessWidget {
                       child: Text(
                         "TRASH CLASSIFIER",
                         style: TextStyle(
-                          fontSize: 22,
+                          fontFamily: 'Simpsonfont',
+                          fontSize: 30,
                           fontWeight: FontWeight.bold,
                           color: Colors.white,
                         ),
@@ -159,7 +160,7 @@ Widget _buildButton(String text, BuildContext context) {
                 text,
                 style: const TextStyle(
                   color: Colors.black,
-                  fontSize: 18,
+                  fontSize: 30,
                 ),
               ),
             ),
