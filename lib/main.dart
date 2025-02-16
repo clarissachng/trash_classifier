@@ -12,7 +12,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        fontFamily: 'Roboto',
+        fontFamily: 'RinsHandwriting',
       ),
       home: const MainPage(),
     );
@@ -31,17 +31,17 @@ class MainPage extends StatelessWidget {
           // Big Tree (Left)
           Positioned(
             left: 0,
-            top: -10,
+            top: 100,
             child: Image.asset(
               'assets/background/big_tree.png',
-              height: 300,
+              height: 200,
               fit: BoxFit.contain,
             ),
           ),
           // Small Tree (Right)
           Positioned(
             right: 0,
-            top: -10,
+            top: 100,
             child: Image.asset(
               'assets/background/small_tree.png',
               height: 300,
@@ -71,20 +71,26 @@ class MainPage extends StatelessWidget {
                       ),
                     ],
                   ),
-                  const SizedBox(height: 50),
+                  const SizedBox(height: 200),
 
                   // Trash Classifier Text
-                  const SizedBox(
+                  Container(
                     width: double.infinity,
                     height: 50,
-                    child: Center(
+                    decoration: BoxDecoration(
+                      color: Colors.black,
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: const SizedBox(
+                      child: Center(
                       child: Text(
                         "TRASH CLASSIFIER",
                         style: TextStyle(
                           fontSize: 22,
                           fontWeight: FontWeight.bold,
-                          color: Colors.black,
+                          color: Colors.white,
                         ),
+                      ),
                       ),
                     ),
                   ),
@@ -99,7 +105,7 @@ class MainPage extends StatelessWidget {
                     alignment: Alignment.bottomRight,
                     child: Image.asset(
                       'assets/character/panda.png',
-                      height: 120,
+                      height: 180,
                       fit: BoxFit.contain,
                     ),
                   ),
@@ -122,30 +128,45 @@ class MainPage extends StatelessWidget {
   }
 }
 
-// Button Widget
 Widget _buildButton(String text, BuildContext context) {
   return Padding(
     padding: const EdgeInsets.symmetric(vertical: 8.0),
     child: SizedBox(
       width: double.infinity,
       height: 50,
-      child: ElevatedButton(
-        style: ElevatedButton.styleFrom(
-          backgroundColor: Colors.white,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(10),
-            side: const BorderSide(color: Colors.black, width: 2),
+      child: Stack(
+        children: [
+          // Background Image
+          Positioned.fill(
+            child: Image.asset(
+              'assets/widgets/outlined-btn.png', // Ensure this file exists
+              fit: BoxFit.cover,
+            ),
           ),
-        ),
-        onPressed: () {},
-        child: Text(
-          text,
-          style: const TextStyle(
-            color: Colors.black,
-            fontSize: 18,
+          // Transparent Button with Text
+          Positioned.fill(
+            child: ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.transparent, // Make button background transparent
+                shadowColor: Colors.transparent, // Remove shadow
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
+                  side: const BorderSide(color: Colors.black, width: 2),
+                ),
+              ),
+              onPressed: () {},
+              child: Text(
+                text,
+                style: const TextStyle(
+                  color: Colors.black,
+                  fontSize: 18,
+                ),
+              ),
+            ),
           ),
-        ),
+        ],
       ),
     ),
   );
 }
+
