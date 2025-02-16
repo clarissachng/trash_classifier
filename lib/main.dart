@@ -31,7 +31,7 @@ class MainPage extends StatelessWidget {
           // Big Tree (Left)
           Positioned(
             left: 0,
-            top: 0,
+            top: -10,
             child: Image.asset(
               'assets/background/big_tree.png',
               height: 300,
@@ -41,10 +41,10 @@ class MainPage extends StatelessWidget {
           // Small Tree (Right)
           Positioned(
             right: 0,
-            top: 50,
+            top: -10,
             child: Image.asset(
               'assets/background/small_tree.png',
-              height: 150,
+              height: 300,
               fit: BoxFit.contain,
             ),
           ),
