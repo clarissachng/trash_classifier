@@ -28,32 +28,32 @@ class RecyclingPage extends StatelessWidget {
           children: [
             SizedBox(height: 10),
             RecyclingItem(
-              imageUrl: 'assets/green_bin.png',
+              imageUrl: 'assets/bins/green_wheelie_bin.png',
               title: 'Green wheelie bin:',
               description: 'Garden waste',
             ),
             RecyclingItem(
-              imageUrl: 'assets/black_bin.png',
+              imageUrl: 'assets/bins/black_wheelie_bin.png',
               title: 'Black wheelie bin:',
               description: 'Non-recyclable waste',
             ),
             RecyclingItem(
-              imageUrl: 'assets/brown_bin.png',
+              imageUrl: 'assets/bins/food_waste.png',
               title: 'Brown bin:',
               description: 'Food waste',
             ),
             RecyclingItem(
-              imageUrl: 'assets/green_box.png',
+              imageUrl: 'assets/bins/green_box.png',
               title: 'Green box:',
               description: 'Plastic and metal',
             ),
             RecyclingItem(
-              imageUrl: 'assets/blue_bag.png',
+              imageUrl: 'assets/bins/blue_bag.png',
               title: 'Blue bag:',
               description: 'Cardboard and brown paper',
             ),
             RecyclingItem(
-              imageUrl: 'assets/black_box.png',
+              imageUrl: 'assets/bins/black_box.png',
               title: 'Black box:',
               description: 'Glass, paper, and others',
             ),
