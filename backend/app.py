@@ -9,76 +9,71 @@ app = Flask(__name__)
 client = MongoClient("mongodb://localhost:27017/")
 db = client['waste_log']
 
-
-@app.route('/scan', methods=['POST'])
-def scan_waste():
-    """Classify scanned waste and save results."""
+@app.route('/monthly_summary/<user_id>', methods=['GET'])
+def get_monthly_summary(user_id):
+    """Get monthly waste scan summary."""
     try:
-        data = request.json
-        user_id = data.get("user_id", "unknown")
+        summary = db.scans.aggregate([
+            {"$match": {"user_id": user_id}},
+            {"$group": {
+                "_id": {"year": {"$year": "$timestamp"}, "month": {"$month": "$timestamp"}},
+                "total": {"$sum": 1}
+            }},
+            {"$sort": {"_id.year": 1, "_id.month": 1}}
+        ])
 
-        # Assume the image is sent as bytes in request.data
-        image_bytes = request.data
-        category = classify_image(image_bytes)
+        monthly_data = [
+            {
+                "month": f"{item['_id']['year']}-{str(item['_id']['month']).zfill(2)}",
+                "total": item["total"]
+            }
+            for item in summary
+        ]
 
-        if category is None:
-            return jsonify({"error": "Classification failed"}), 500
-
-        # Save scan result with 12 categories
-        scan_entry = {
-            "user_id": user_id,
-            "category": category,
-            "timestamp": datetime.utcnow()
-        }
-        db.scans.insert_one(scan_entry)
-
-        return jsonify({
-            "user_id": user_id,
-            "category": category,
-            "timestamp": scan_entry["timestamp"].isoformat()
-        }), 200
+        return jsonify(monthly_data), 200
 
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
-
-@app.route('/history/<user_id>', methods=['GET'])
-def get_history(user_id):
-    """Get scan history for the user."""
-    scans = list(db.scans.find({"user_id": user_id}, {"_id": 0}))
-    return jsonify(scans), 200
-
-@app.route('/summary/<user_id>', methods=['GET'])
-def get_summary(user_id):
-    """Get a summary of how many items were recycled by category."""
+@app.route('/category_summary/<user_id>/<month>', methods=['GET'])
+def get_category_summary(user_id, month):
+    """Get category-wise waste summary for a specific month."""
     try:
-        # Aggregate total items per category for the user
+        start_date = datetime.strptime(month, '%Y-%m')
+        end_date = datetime(start_date.year, start_date.month + 1, 1) if start_date.month < 12 else \
+            datetime(start_date.year + 1, 1, 1)
+
         summary = db.scans.aggregate([
-            {"$match": {"user_id": user_id}},
-            {"$group": {"_id": "$category", "total": {"$sum": 1}}}
+            {"$match": {
+                "user_id": user_id,
+                "timestamp": {"$gte": start_date, "$lt": end_date}
+            }},
+            {"$group": {
+                "_id": "$category",
+                "total": {"$sum": 1}
+            }}
         ])
 
-        # Convert results to a dictionary
-        summary_dict = {item["_id"]: item["total"] for item in summary}
-
-        # Include all 12 categories, even if 0
         CATEGORIES = [
             'paper', 'cardboard', 'biological', 'metal',
             'plastic', 'green-glass', 'brown-glass', 'white-glass',
             'clothes', 'shoes', 'batteries', 'trash'
         ]
-        full_summary = {category: summary_dict.get(category, 0) for category in CATEGORIES}
 
-        return jsonify(full_summary), 200
+        category_summary = {cat: 0 for cat in CATEGORIES}
+        for item in summary:
+            category_summary[item["_id"]] = item["total"]
+
+        return jsonify(category_summary), 200
 
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
+# Maintain achievements endpoint
 @app.route('/achievements/<user_id>', methods=['GET'])
 def get_achievements(user_id):
     """Get achievements based on category counts."""
     try:
-        # Get total counts per category
         category_counts = db.scans.aggregate([
             {"$match": {"user_id": user_id}},
             {"$group": {"_id": "$category", "total": {"$sum": 1}}}
@@ -87,7 +82,6 @@ def get_achievements(user_id):
 
         achievements = []
 
-        # Category-specific achievements
         if counts.get("paper", 0) >= 20:
             achievements.append("🌱 Eco Paper Saver")
         if counts.get("cardboard", 0) >= 15:
@@ -98,29 +92,14 @@ def get_achievements(user_id):
             achievements.append("🛠️ Metal Recycler")
         if counts.get("plastic", 0) >= 30:
             achievements.append("🧴 Plastic Warrior")
-
-        # Glass combined achievement
-        if (
-            counts.get("green-glass", 0) >= 10 and
-            counts.get("brown-glass", 0) >= 10 and
-            counts.get("white-glass", 0) >= 10
-        ):
+        if (counts.get("green-glass", 0) >= 10 and counts.get("brown-glass", 0) >= 10 and counts.get("white-glass", 0) >= 10):
             achievements.append("🥂 Glass Collector")
-
-        # Fashion combined achievement
-        if (
-            counts.get("clothes", 0) >= 10 and
-            counts.get("shoes", 0) >= 5
-        ):
+        if (counts.get("clothes", 0) >= 10 and counts.get("shoes", 0) >= 5):
             achievements.append("👔 Fashion Saver")
-
         if counts.get("batteries", 0) >= 5:
             achievements.append("⚡ Battery Recycler")
-
         if counts.get("trash", 0) >= 20:
             achievements.append("🗑️ Trash Reducer")
-
-        # All-round Recycler Achievement (5 items in each category)
         if all(counts.get(cat, 0) >= 5 for cat in [
             "paper", "cardboard", "biological", "metal", "plastic",
             "green-glass", "brown-glass", "white-glass",

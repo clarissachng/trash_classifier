@@ -44,6 +44,44 @@ class ApiService {
     }
   }
 
+  // Fetch Monthly Waste Summary
+  Future<List<Map<String, dynamic>>?> getMonthlySummary(String userId) async {
+    try {
+      var response = await http.get(
+        Uri.parse('$apiUrl/monthly_summary/$userId'),
+        headers: {"Content-Type": "application/json"},
+      );
+      if (response.statusCode == 200) {
+        return List<Map<String, dynamic>>.from(jsonDecode(response.body));
+      } else {
+        print('Failed to fetch monthly summary: ${response.statusCode}');
+        return null;
+      }
+    } catch (e) {
+      print('Error fetching monthly summary: $e');
+      return null;
+    }
+  }
+
+// Fetch Category Summary for Selected Month
+  Future<Map<String, int>?> getCategorySummary(String userId, String month) async {
+    try {
+      var response = await http.get(
+        Uri.parse('$apiUrl/category_summary/$userId/$month'),
+        headers: {"Content-Type": "application/json"},
+      );
+      if (response.statusCode == 200) {
+        return Map<String, int>.from(jsonDecode(response.body));
+      } else {
+        print('Failed to fetch category summary: ${response.statusCode}');
+        return null;
+      }
+    } catch (e) {
+      print('Error fetching category summary: $e');
+      return null;
+    }
+  }
+
   // Submit waste scan to backend (.pth model compatible)
   Future<Map<String, dynamic>?> submitScan(String userId, File imageFile) async {
     try {
