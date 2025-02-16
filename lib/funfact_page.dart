@@ -105,45 +105,28 @@ class RecyclingItem extends StatelessWidget {
   }
 }
 
-class RecyclingFactsCarousel extends StatefulWidget {
-  @override
-  _RecyclingFactsCarouselState createState() => _RecyclingFactsCarouselState();
-}
-
-class _RecyclingFactsCarouselState extends State<RecyclingFactsCarousel> {
-  final PageController _controller = PageController();
-
-  final List<String> facts = [
-    'It takes as few as 30 days for a glass container to go from a recycling bin back to a store shelf.',
-    'Recycling one aluminum can saves enough energy to run a TV for three hours.',
-    'Every ton of recycled paper saves 17 trees and 7,000 gallons of water.',
-  ];
+class RecyclingFactsCarousel extends StatelessWidget {
+  final List<String> imagePaths = List.generate(
+    15,
+    (index) => 'assets/funfacts/funfact_${index + 1}.png',
+  );
 
   @override
   Widget build(BuildContext context) {
-    return PageView.builder(
-      controller: _controller,
-      itemCount: facts.length,
-      itemBuilder: (context, index) {
-        return Card(
-          margin: EdgeInsets.symmetric(horizontal: 20),
-          elevation: 4,
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-          child: Padding(
-            padding: EdgeInsets.all(16),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  facts[index],
-                  textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
-                ),
-              ],
+    return SizedBox(
+      height: 250, 
+      child: PageView.builder(
+        itemCount: imagePaths.length,
+        itemBuilder: (context, index) {
+          return Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Image.asset(
+              imagePaths[index],
+              fit: BoxFit.cover, 
             ),
-          ),
-        );
-      },
+          );
+        },
+      ),
     );
   }
 }

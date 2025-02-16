@@ -46,7 +46,7 @@
 		</data>
 		<key>Frameworks/App.framework/App</key>
 		<data>
-		VCDHqwSYAN2tvAOTeajkT+kBGgU=
+		tzus2b7BZlCfhQ9Vr4gutQzrbu4=
 		</data>
 		<key>Frameworks/App.framework/Info.plist</key>
 		<data>
@@ -54,15 +54,15 @@
 		</data>
 		<key>Frameworks/App.framework/_CodeSignature/CodeResources</key>
 		<data>
-		qqHEsLpNYXP/+Omc5HYtoLF1mtE=
+		YggqabZxiOW9Qk2YLWXH4Ija12o=
 		</data>
 		<key>Frameworks/App.framework/flutter_assets/AssetManifest.bin</key>
 		<data>
-		ME0cAg6cl/bTZmwXEVgMugDccUI=
+		VVR8z5Rw+kx+b54UZjI1EGmdr6Y=
 		</data>
 		<key>Frameworks/App.framework/flutter_assets/AssetManifest.json</key>
 		<data>
-		oG5/OGn+vw7vp/nu5DUDoZJ4nFc=
+		OKuQmoBQXTBXrZwiv+UhNT3CbAc=
 		</data>
 		<key>Frameworks/App.framework/flutter_assets/FontManifest.json</key>
 		<data>
@@ -71,6 +71,30 @@
 		<key>Frameworks/App.framework/flutter_assets/NOTICES.Z</key>
 		<data>
 		MtGhqy1N83LymF+xVlvBDq1bNtY=
+		</data>
+		<key>Frameworks/App.framework/flutter_assets/assets/bins/black_box.png</key>
+		<data>
+		EN+PcGtFqPQfBYcbScGxwA1bdR4=
+		</data>
+		<key>Frameworks/App.framework/flutter_assets/assets/bins/black_wheelie_bin.png</key>
+		<data>
+		RXyTHip6zR3WKbC+/ijQIiSkzjs=
+		</data>
+		<key>Frameworks/App.framework/flutter_assets/assets/bins/blue_bag.png</key>
+		<data>
+		S30S+TXp/icbFuxpVwuAeETzS1U=
+		</data>
+		<key>Frameworks/App.framework/flutter_assets/assets/bins/food_waste.png</key>
+		<data>
+		gw4Jph5EiM8zH3nK2mqiYi/Uuo8=
+		</data>
+		<key>Frameworks/App.framework/flutter_assets/assets/bins/green_box.png</key>
+		<data>
+		uDNMySyS2aIjajk3NK6WsbZG8xw=
+		</data>
+		<key>Frameworks/App.framework/flutter_assets/assets/bins/green_wheelie_bin.png</key>
+		<data>
+		IngRMxKR4jKTBRcAil6gFmOYASo=
 		</data>
 		<key>Frameworks/App.framework/flutter_assets/fonts/MaterialIcons-Regular.otf</key>
 		<data>
@@ -194,11 +218,11 @@
 		</data>
 		<key>Runner.debug.dylib</key>
 		<data>
-		uLYML2NIOkgbiNEbHXX45MRU7b0=
+		9ZNbUuO7ohup3DMsB46tGBvANhA=
 		</data>
 		<key>__preview.dylib</key>
 		<data>
-		Hgh571vROBgcOp4psU4FNUB7e3c=
+		frYNETzeALn1ValG2x16z7f3d8A=
 		</data>
 		<key>embedded.mobileprovision</key>
 		<data>
@@ -281,7 +305,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			fRzdhit4qCuiUzxLb4feZyW6PzDNEWJqm3FOrGWwG14=
+			kTUIcrA1Bq3VstStJoJ+CDDJVaKgspNhXcQG78EAF88=
 			</data>
 		</dict>
 		<key>Frameworks/App.framework/Info.plist</key>
@@ -295,21 +319,21 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			qCiTLCUzAkupCIAzNcMmKCqsMmSJdh1YWXxN7G8O7as=
+			Q/utKTE3qswwv/zmzZsPe8syBUc5InYh9lCM8OfMIZM=
 			</data>
 		</dict>
 		<key>Frameworks/App.framework/flutter_assets/AssetManifest.bin</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			AK9VrT1vIYmP534P8JLRoc2lLJQbaGDpko1FyK+MCV0=
+			jAKt6BjyOjuC2ARDDBI63A/5912Ep+8M9oYES+msSWQ=
 			</data>
 		</dict>
 		<key>Frameworks/App.framework/flutter_assets/AssetManifest.json</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			Sps95+7JukayebvM0TLjL1LW1VXXndpKp/O8tOm9ZR8=
+			p2uQBLSna5l75bG54cuAf8hIJ9AxdnWeoEPNqMA+GKc=
 			</data>
 		</dict>
 		<key>Frameworks/App.framework/flutter_assets/FontManifest.json</key>
@@ -324,6 +348,48 @@
 			<key>hash2</key>
 			<data>
 			eH0WBS/Rqj+Xj/ifDN1v0/73XCfI+QjAo+WtfyEImFY=
+			</data>
+		</dict>
+		<key>Frameworks/App.framework/flutter_assets/assets/bins/black_box.png</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			ecOlBM+bmsu4L1b4YEQ0NkbR81eR8GJ05A1xlwFAnSo=
+			</data>
+		</dict>
+		<key>Frameworks/App.framework/flutter_assets/assets/bins/black_wheelie_bin.png</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			vfNrjB8V5Vw3xL0lvAqYCi2La2oED6r6OIkDKPK5LbY=
+			</data>
+		</dict>
+		<key>Frameworks/App.framework/flutter_assets/assets/bins/blue_bag.png</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			tsat1qZbCO7ePeDT++W0zBVd25y8cv8/aYBCiH7Eijw=
+			</data>
+		</dict>
+		<key>Frameworks/App.framework/flutter_assets/assets/bins/food_waste.png</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			sktFOJ830ueQV9ZwZDZeM2iQwC10Z4NKAhRCkxH8Gzw=
+			</data>
+		</dict>
+		<key>Frameworks/App.framework/flutter_assets/assets/bins/green_box.png</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			Im8j61tWdcR59b791KromLg5kE/RW1HJCgZJvwwYG8M=
+			</data>
+		</dict>
+		<key>Frameworks/App.framework/flutter_assets/assets/bins/green_wheelie_bin.png</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			DErAYsMvY8fq2cTXQul9SuDYWBda/AiF3Hhf7v+Nkkg=
 			</data>
 		</dict>
 		<key>Frameworks/App.framework/flutter_assets/fonts/MaterialIcons-Regular.otf</key>
@@ -526,14 +592,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			xdpLM1bdcrQ8m3y1+et5HNWz3aBhWbjmeLbPjamiYqA=
+			HOerHjg7aljv71YPtJSLBmbTY9/CG+MsHIzydT4d1tM=
 			</data>
 		</dict>
 		<key>__preview.dylib</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			2ko4wg3s8ZaAEdj8csZvGOvhbZHwD5WKUwNNNcRD+eE=
+			0UuEcAUnJkpfB81nobexVY9kO80vnl6YBS3ZGRyk8pU=
 			</data>
 		</dict>
 		<key>embedded.mobileprovision</key>

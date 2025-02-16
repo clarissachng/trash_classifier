@@ -10,11 +10,11 @@
 		</data>
 		<key>Resources/flutter_assets/AssetManifest.bin</key>
 		<data>
-		ME0cAg6cl/bTZmwXEVgMugDccUI=
+		VVR8z5Rw+kx+b54UZjI1EGmdr6Y=
 		</data>
 		<key>Resources/flutter_assets/AssetManifest.json</key>
 		<data>
-		oG5/OGn+vw7vp/nu5DUDoZJ4nFc=
+		OKuQmoBQXTBXrZwiv+UhNT3CbAc=
 		</data>
 		<key>Resources/flutter_assets/FontManifest.json</key>
 		<data>
@@ -23,6 +23,30 @@
 		<key>Resources/flutter_assets/NOTICES.Z</key>
 		<data>
 		MtGhqy1N83LymF+xVlvBDq1bNtY=
+		</data>
+		<key>Resources/flutter_assets/assets/bins/black_box.png</key>
+		<data>
+		EN+PcGtFqPQfBYcbScGxwA1bdR4=
+		</data>
+		<key>Resources/flutter_assets/assets/bins/black_wheelie_bin.png</key>
+		<data>
+		RXyTHip6zR3WKbC+/ijQIiSkzjs=
+		</data>
+		<key>Resources/flutter_assets/assets/bins/blue_bag.png</key>
+		<data>
+		S30S+TXp/icbFuxpVwuAeETzS1U=
+		</data>
+		<key>Resources/flutter_assets/assets/bins/food_waste.png</key>
+		<data>
+		gw4Jph5EiM8zH3nK2mqiYi/Uuo8=
+		</data>
+		<key>Resources/flutter_assets/assets/bins/green_box.png</key>
+		<data>
+		uDNMySyS2aIjajk3NK6WsbZG8xw=
+		</data>
+		<key>Resources/flutter_assets/assets/bins/green_wheelie_bin.png</key>
+		<data>
+		IngRMxKR4jKTBRcAil6gFmOYASo=
 		</data>
 		<key>Resources/flutter_assets/fonts/MaterialIcons-Regular.otf</key>
 		<data>
@@ -62,14 +86,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			AK9VrT1vIYmP534P8JLRoc2lLJQbaGDpko1FyK+MCV0=
+			jAKt6BjyOjuC2ARDDBI63A/5912Ep+8M9oYES+msSWQ=
 			</data>
 		</dict>
 		<key>Resources/flutter_assets/AssetManifest.json</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			Sps95+7JukayebvM0TLjL1LW1VXXndpKp/O8tOm9ZR8=
+			p2uQBLSna5l75bG54cuAf8hIJ9AxdnWeoEPNqMA+GKc=
 			</data>
 		</dict>
 		<key>Resources/flutter_assets/FontManifest.json</key>
@@ -84,6 +108,48 @@
 			<key>hash2</key>
 			<data>
 			eH0WBS/Rqj+Xj/ifDN1v0/73XCfI+QjAo+WtfyEImFY=
+			</data>
+		</dict>
+		<key>Resources/flutter_assets/assets/bins/black_box.png</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			ecOlBM+bmsu4L1b4YEQ0NkbR81eR8GJ05A1xlwFAnSo=
+			</data>
+		</dict>
+		<key>Resources/flutter_assets/assets/bins/black_wheelie_bin.png</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			vfNrjB8V5Vw3xL0lvAqYCi2La2oED6r6OIkDKPK5LbY=
+			</data>
+		</dict>
+		<key>Resources/flutter_assets/assets/bins/blue_bag.png</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			tsat1qZbCO7ePeDT++W0zBVd25y8cv8/aYBCiH7Eijw=
+			</data>
+		</dict>
+		<key>Resources/flutter_assets/assets/bins/food_waste.png</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			sktFOJ830ueQV9ZwZDZeM2iQwC10Z4NKAhRCkxH8Gzw=
+			</data>
+		</dict>
+		<key>Resources/flutter_assets/assets/bins/green_box.png</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			Im8j61tWdcR59b791KromLg5kE/RW1HJCgZJvwwYG8M=
+			</data>
+		</dict>
+		<key>Resources/flutter_assets/assets/bins/green_wheelie_bin.png</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			DErAYsMvY8fq2cTXQul9SuDYWBda/AiF3Hhf7v+Nkkg=
 			</data>
 		</dict>
 		<key>Resources/flutter_assets/fonts/MaterialIcons-Regular.otf</key>

@@ -69,6 +69,21 @@ flutter:
     - assets/bins/green_box.png
     - assets/bins/blue_bag.png
     - assets/bins/black_box.png
+    - assets/funfacts/funfact_1.png
+    - assets/funfacts/funfact_2.png
+    - assets/funfacts/funfact_3.png
+    - assets/funfacts/funfact_4.png
+    - assets/funfacts/funfact_5.png
+    - assets/funfacts/funfact_6.png
+    - assets/funfacts/funfact_7.png
+    - assets/funfacts/funfact_8.png
+    - assets/funfacts/funfact_9.png
+    - assets/funfacts/funfact_10.png
+    - assets/funfacts/funfact_11.png
+    - assets/funfacts/funfact_12.png
+    - assets/funfacts/funfact_13.png
+    - assets/funfacts/funfact_14.png
+    - assets/funfacts/funfact_15.png
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
 

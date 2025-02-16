@@ -1,0 +1,1 @@
+ /Users/sss/Desktop/coding/ai_powered_trash_classifier/.dart_tool/flutter_build/5bad69dddfdff21c61e63fcf1834edce/native_assets.yaml: 
