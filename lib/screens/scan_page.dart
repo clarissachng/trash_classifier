@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
 import 'learn_more_page.dart';
+import '../widget/drawer_menu.dart';
+import '../widget/settings_page.dart';
 
 class ScanPage extends StatefulWidget {
   const ScanPage({super.key});
@@ -42,6 +44,19 @@ class _ScanPageState extends State<ScanPage> {
       ),
       body: Stack(
         children: [
+
+          // Top Right Menu Icon
+              Align(
+                alignment: Alignment.topRight,
+                child: IconButton(
+                  icon: Image.asset(
+                    'assets/widgets/menu-icon.png', // Ensure you have this image
+                    width: 75,
+                  ),
+                  onPressed: () => _navigateToDrawer(context), // Call your function here
+                ),
+              ),
+              
           Positioned(
             top: MediaQuery.of(context).size.height * 0.1, // Adjust to move up/down
             left: MediaQuery.of(context).size.width * 0.1,
@@ -134,9 +149,9 @@ class _ScanPageState extends State<ScanPage> {
             bottom: 20,
             left: 20,
             child: IconButton(
-              icon: Image.asset('assets/icon/settings-icon.png', height: 40), // Ensure image exists
+              icon: Image.asset('assets/icon/settings-icon.png', height: 75), // Ensure image exists
               onPressed: () {
-                // Open settings or navigate to settings page
+                _navigateToSettings(context);
               },
             ),
           ),
@@ -145,3 +160,17 @@ class _ScanPageState extends State<ScanPage> {
     );
   }
 }
+
+void _navigateToDrawer(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => DrawerMenu()),
+    );
+  }
+
+void _navigateToSettings(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => SettingsPage()),
+    );
+  }
