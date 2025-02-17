@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
+import 'learn_more_page.dart';
 
 class ScanPage extends StatefulWidget {
   const ScanPage({super.key});
@@ -79,6 +80,32 @@ class _ScanPageState extends State<ScanPage> {
                 padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 40),
               ),
               child: const Text("Scan My Waste", style: TextStyle(fontSize: 18, color: Colors.white)),
+            ),
+          ),
+
+          // Learn More Button
+          Positioned(
+            bottom: 100,
+            left: MediaQuery.of(context).size.width * 0.3,
+            right: MediaQuery.of(context).size.width * 0.3,
+            child: ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const LearnMorePage()),
+                );
+              },
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.black,
+                padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 40),
+              ),
+              child: const Text(
+                "Learn More",
+                style: TextStyle(
+                  fontSize: 18,
+                  color: Colors.white,
+                ),
+              ),
             ),
           ),
 
