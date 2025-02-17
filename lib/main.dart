@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'screens/scan_page.dart';
 import 'overview_page.dart';
+import 'funfact_page.dart';
 import 'widget/settings_page.dart';
 
 void main() {
@@ -24,12 +25,13 @@ class MyApp extends StatelessWidget {
       ),
         scaffoldBackgroundColor: Color(0xFFFEFFFB)
       ),
-      
+
       initialRoute: '/',
       routes: {
         '/': (context) => const MainPage(),
         '/scan_page': (context) => const ScanPage(),
         '/overview_page': (context) => OverviewPage(userId: 'test_user'),
+        '/funfact_page': (context) => Funfact(),
       },
     );
   }
@@ -64,7 +66,7 @@ class MainPage extends StatelessWidget {
               fit: BoxFit.contain,
             ),
           ),
-          
+
           Positioned(
             right: 0,
             bottom: 0,
@@ -77,7 +79,7 @@ class MainPage extends StatelessWidget {
 
            // Settings icon replaced with specific image
           Positioned(
-            left: 20, 
+            left: 20,
             bottom:20,
             child: IconButton(
               icon: Image.asset('assets/icon/settings-icon.png', height: 75),
@@ -136,9 +138,27 @@ class MainPage extends StatelessWidget {
                   ),
                   _buildButton("Scan my waste", context, '/scan_page'),
                   _buildButton("Waste Overview", context, '/overview_page'),
-                  _buildButton("Tips/Fun facts", context),
+                  _buildButton("Tips/Fun facts", context, '/funfact_page'),
+                  const Spacer(),
 
-                 
+                  // Panda illustration moved to the right
+                  Align(
+                    alignment: Alignment.bottomRight,
+                    child: Image.asset(
+                      'assets/character/panda.png',
+                      height: 180,
+                      fit: BoxFit.contain,
+                    ),
+                  ),
+
+                  // Settings icon replaced with specific image
+                  Align(
+                    alignment: Alignment.bottomLeft,
+                    child: IconButton(
+                      icon: Image.asset('assets/icon/settings-icon.png', height: 30),
+                      onPressed: () {},
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -197,3 +217,5 @@ Widget _buildButton(String text, BuildContext context, [String? route]) {
     ),
   );
 }
+
+
