@@ -23,13 +23,13 @@ class LearnMorePage extends StatelessWidget {
             Center(
               child: Image.asset(
                 'assets/bin/brown_bin.png', // Ensure image exists
-                height: 100,
+                height: 200,
               ),
             ),
             const SizedBox(height: 20),
             const Text(
               "BROWN BIN",
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+              style: TextStyle(fontFamily: 'Simpsonfont', fontSize: 24, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 10),
             const Text(

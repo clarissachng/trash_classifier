@@ -14,6 +14,9 @@ class ScanPage extends StatefulWidget {
 class _ScanPageState extends State<ScanPage> {
   CameraController? _controller;
   List<CameraDescription>? cameras;
+  bool _showLearnMore = false; // Initially hidden
+  String _scanText = "Place your item in front of the camera!"; // Initial instruction text
+  String _scannedItem = ""; // Initially empty, appears after scanning
 
   @override
   void initState() {
@@ -29,6 +32,15 @@ class _ScanPageState extends State<ScanPage> {
     setState(() {});
   }
 
+  void _scanItem() {
+    // Simulate a scan and update the UI
+    setState(() {
+      _showLearnMore = true; // Show "Learn More" button
+      _scannedItem = "Plastic Bottle"; // Replace with actual detected item
+      _scanText = "Your item is:"; // Instruction above scanned item
+    });
+  }
+
   @override
   void dispose() {
     _controller?.dispose();
@@ -38,139 +50,162 @@ class _ScanPageState extends State<ScanPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Scan My Waste"),
-        backgroundColor: Colors.black,
-      ),
-      body: Stack(
-        children: [
-
-          // Top Right Menu Icon
-              Align(
-                alignment: Alignment.topRight,
-                child: IconButton(
-                  icon: Image.asset(
-                    'assets/widgets/menu-icon.png', // Ensure you have this image
-                    width: 75,
-                  ),
-                  onPressed: () => _navigateToDrawer(context), // Call your function here
+      body: SafeArea(
+        child: Stack(
+          children: [
+            // Top Right Menu Icon
+            Positioned(
+              top: 20,
+              right: 20,
+              child: IconButton(
+                icon: Image.asset(
+                  'assets/widgets/menu-icon.png',
+                  width: 75,
                 ),
-              ),
-              
-          Positioned(
-            top: MediaQuery.of(context).size.height * 0.1, // Adjust to move up/down
-            left: MediaQuery.of(context).size.width * 0.1,
-            right: MediaQuery.of(context).size.width * 0.1,
-            child: Align(
-              alignment: Alignment.center,
-              child: Container(
-                width: MediaQuery.of(context).size.width * 0.8, // 80% of screen width
-                height: MediaQuery.of(context).size.height * 0.5, // 50% of screen height
-                decoration: BoxDecoration(
-                  border: Border.all(color: Colors.black, width: 2),
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: _controller == null || !_controller!.value.isInitialized
-                    ? const Center(child: CircularProgressIndicator())
-                    : ClipRRect(
-                  borderRadius: BorderRadius.circular(10),
-                  child: CameraPreview(_controller!),
-                ),
+                onPressed: () => _navigateToDrawer(context),
               ),
             ),
-          ),
 
-
-          // Scan My Waste Button
-          Positioned(
-            top: MediaQuery.of(context).size.height * 0.50,
-            left: 20,
-            right: 20,
-            child: GestureDetector(
-              onTap: () {
-                // Define your scan functionality here
-              },
-              child: Stack(
+            // Camera Preview Box + Instructions + Scanned Item
+            Positioned(
+              top: MediaQuery.of(context).size.height * 0.125,
+              left: MediaQuery.of(context).size.width * 0.1,
+              right: MediaQuery.of(context).size.width * 0.1,
+              child: Align(
                 alignment: Alignment.center,
-                children: [
-                  Image.asset(
-                    'assets/widgets/black-btn.png',
-                    height: 50,
-                  ),
-                  const Text(
-                    "Scan My Waste",
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
+                child: Column(
+                  children: [
+                    // Instruction Text (Changes on scan)
+                    Text(
+                      _scanText,
+                      style: const TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
-                  ),
-                ],
+                    const SizedBox(height: 10), // Spacing
+
+                    // Camera Frame
+                    Container(
+                      width: MediaQuery.of(context).size.width * 0.8,
+                      height: MediaQuery.of(context).size.height * 0.5,
+                      decoration: BoxDecoration(
+                        border: Border.all(color: Colors.black, width: 2),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: _controller == null || !_controller!.value.isInitialized
+                          ? const Center(child: CircularProgressIndicator())
+                          : ClipRRect(
+                              borderRadius: BorderRadius.circular(10),
+                              child: CameraPreview(_controller!),
+                            ),
+                    ),
+
+                    const SizedBox(height: 10), // Space between camera and scanned item
+
+                    // Scanned Item Text (Appears only after scanning)
+                    if (_scannedItem.isNotEmpty)
+                      Text(
+                        _scannedItem,
+                        style: const TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.blueAccent,
+                        ),
+                      ),
+                  ],
+                ),
               ),
             ),
-          ),
 
-
-          // Learn More Button
-          Positioned(
-            bottom: 100,
-            left: MediaQuery.of(context).size.width * 0.3,
-            right: MediaQuery.of(context).size.width * 0.3,
-            child: GestureDetector(
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const LearnMorePage()),
-                );
-              },
-              child: Stack(
-                alignment: Alignment.center,
-                children: [
-                  Image.asset(
-                    'assets/widgets/outlined-btn.png',
-                    height: 60,
-                  ),
-                  const Text(
-                    "Learn More",
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black,
+            // Scan My Waste Button
+            Positioned(
+              top: MediaQuery.of(context).size.height * 0.52,
+              left: MediaQuery.of(context).size.width * 0.15,
+              right: MediaQuery.of(context).size.width * 0.15,
+              child: GestureDetector(
+                onTap: _scanItem,
+                child: Stack(
+                  alignment: Alignment.center,
+                  children: [
+                    Image.asset(
+                      'assets/widgets/black-btn.png',
+                      height: 50,
                     ),
-                  ),
-                ],
+                    const Text(
+                      "Scan My Waste",
+                      style: TextStyle(
+                        fontSize: 22,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
-          ),
 
+            // Learn More Button (Initially Hidden)
+            if (_showLearnMore)
+              Positioned(
+                bottom: 90,
+                left: MediaQuery.of(context).size.width * 0.3,
+                right: MediaQuery.of(context).size.width * 0.3,
+                child: GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => const LearnMorePage()),
+                    );
+                  },
+                  child: Stack(
+                    alignment: Alignment.center,
+                    children: [
+                      Image.asset(
+                        'assets/widgets/outlined-btn.png',
+                        height: 60,
+                      ),
+                      const Text(
+                        "Learn More",
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
 
-          // Settings Button (Bottom Left)
-          Positioned(
-            bottom: 20,
-            left: 20,
-            child: IconButton(
-              icon: Image.asset('assets/icon/settings-icon.png', height: 75), // Ensure image exists
-              onPressed: () {
-                _navigateToSettings(context);
-              },
+            // Settings Button (Bottom Left)
+            Positioned(
+              bottom: 20,
+              left: 20,
+              child: IconButton(
+                icon: Image.asset('assets/icon/settings-icon.png', height: 75),
+                onPressed: () {
+                  _navigateToSettings(context);
+                },
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
 }
 
 void _navigateToDrawer(BuildContext context) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => DrawerMenu()),
-    );
-  }
+  Navigator.push(
+    context,
+    MaterialPageRoute(builder: (context) => DrawerMenu()),
+  );
+}
 
 void _navigateToSettings(BuildContext context) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => SettingsPage()),
-    );
-  }
+  Navigator.push(
+    context,
+    MaterialPageRoute(builder: (context) => SettingsPage()),
+  );
+}
