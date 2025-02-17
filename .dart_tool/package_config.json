@@ -75,8 +75,7 @@
     },
     {
       "name": "equatable",
-      "rootUri": "file:///C:/Users/limji/AppData/Local/Pub/Cache/hosted/pub.dev/equatable-2.0.7",
-
+      "rootUri": "file:///Users/clarissachng/.pub-cache/hosted/pub.dev/equatable-2.0.7",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -112,9 +111,7 @@
     },
     {
       "name": "fl_chart",
-
-      "rootUri": "file:///C:/Users/limji/AppData/Local/Pub/Cache/hosted/pub.dev/fl_chart-0.63.0",
-
+      "rootUri": "file:///Users/clarissachng/.pub-cache/hosted/pub.dev/fl_chart-0.63.0",
       "packageUri": "lib/",
       "languageVersion": "3.0"
     },
@@ -207,6 +204,12 @@
       "rootUri": "file:///Users/clarissachng/.pub-cache/hosted/pub.dev/image_picker_windows-0.2.1+1",
       "packageUri": "lib/",
       "languageVersion": "2.19"
+    },
+    {
+      "name": "intl",
+      "rootUri": "file:///Users/clarissachng/.pub-cache/hosted/pub.dev/intl-0.18.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
     },
     {
       "name": "leak_tracker",
@@ -347,9 +350,7 @@
       "languageVersion": "3.5"
     }
   ],
-
-  "generated": "2025-02-17T01:03:03.606685Z",
-
+  "generated": "2025-02-17T01:56:52.803617Z",
   "generator": "pub",
   "generatorVersion": "3.5.3",
   "flutterRoot": "file:///Users/clarissachng/development/flutter",
