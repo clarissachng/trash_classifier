@@ -79,11 +79,11 @@ class _ScanPageState extends State<ScanPage> {
                     Text(
                       _scanText,
                       style: const TextStyle(
-                        fontSize: 18,
+                        fontSize: 22,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    const SizedBox(height: 10), // Spacing
+                    const SizedBox(height: 20), // Spacing
 
                     // Camera Frame
                     Container(
@@ -101,16 +101,16 @@ class _ScanPageState extends State<ScanPage> {
                             ),
                     ),
 
-                    const SizedBox(height: 10), // Space between camera and scanned item
+                    const SizedBox(height: 20), // Space between camera and scanned item
 
                     // Scanned Item Text (Appears only after scanning)
                     if (_scannedItem.isNotEmpty)
                       Text(
                         _scannedItem,
                         style: const TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.blueAccent,
+                          fontFamily: 'Simpsonfont',
+                          fontSize: 30,
+                          
                         ),
                       ),
                   ],
@@ -120,7 +120,7 @@ class _ScanPageState extends State<ScanPage> {
 
             // Scan My Waste Button
             Positioned(
-              top: MediaQuery.of(context).size.height * 0.52,
+              top: MediaQuery.of(context).size.height * 0.57,
               left: MediaQuery.of(context).size.width * 0.15,
               right: MediaQuery.of(context).size.width * 0.15,
               child: GestureDetector(
@@ -148,7 +148,7 @@ class _ScanPageState extends State<ScanPage> {
             // Learn More Button (Initially Hidden)
             if (_showLearnMore)
               Positioned(
-                bottom: 90,
+                bottom: 150,
                 left: MediaQuery.of(context).size.width * 0.3,
                 right: MediaQuery.of(context).size.width * 0.3,
                 child: GestureDetector(
@@ -163,12 +163,12 @@ class _ScanPageState extends State<ScanPage> {
                     children: [
                       Image.asset(
                         'assets/widgets/outlined-btn.png',
-                        height: 60,
+                        height: 90,
                       ),
                       const Text(
                         "Learn More",
                         style: TextStyle(
-                          fontSize: 18,
+                          fontSize: 35,
                           fontWeight: FontWeight.bold,
                           color: Colors.black,
                         ),
