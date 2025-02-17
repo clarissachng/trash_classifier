@@ -70,6 +70,7 @@ flutter:
     - assets/widgets/
     - assets/bins/
     - assets/funfacts/
+    - assets/arrow/
   fonts:
     - family: Simpsonfont
       fonts:

@@ -9,6 +9,9 @@ class Funfact extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+      fontFamily: 'RinsHandwriting',
+    ),
       home: RecyclingPage(),
     );
   }
