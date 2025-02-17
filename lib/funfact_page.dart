@@ -27,45 +27,33 @@ class RecyclingPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             SizedBox(height: 10),
-            RecyclingItem(
-              imageUrl: 'assets/bins/green_wheelie_bin.png',
-              title: 'Green wheelie bin:',
-              description: 'Garden waste',
-            ),
-            RecyclingItem(
-              imageUrl: 'assets/bins/black_wheelie_bin.png',
-              title: 'Black wheelie bin:',
-              description: 'Non-recyclable waste',
-            ),
-            RecyclingItem(
-              imageUrl: 'assets/bins/food_waste.png',
-              title: 'Brown bin:',
-              description: 'Food waste',
-            ),
-            RecyclingItem(
-              imageUrl: 'assets/bins/green_box.png',
-              title: 'Green box:',
-              description: 'Plastic and metal',
-            ),
-            RecyclingItem(
-              imageUrl: 'assets/bins/blue_bag.png',
-              title: 'Blue bag:',
-              description: 'Cardboard and brown paper',
-            ),
-            RecyclingItem(
-              imageUrl: 'assets/bins/black_box.png',
-              title: 'Black box:',
-              description: 'Glass, paper, and others',
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: Wrap(
+                alignment: WrapAlignment.center,
+                spacing: 20, 
+                runSpacing: 10, 
+                children: [
+                  RecyclingItem(imageUrl: 'assets/bins/green_wheelie_bin.png', title: 'Green wheelie bin', description: 'Garden waste'),
+                  RecyclingItem(imageUrl: 'assets/bins/black_wheelie_bin.png', title: 'Black wheelie bin', description: 'Non-recyclable waste'),
+                  RecyclingItem(imageUrl: 'assets/bins/food_waste.png', title: 'Brown bin', description: 'Food waste'),
+                  RecyclingItem(imageUrl: 'assets/bins/green_box.png', title: 'Green box', description: 'Plastic and metal'),
+                  RecyclingItem(imageUrl: 'assets/bins/blue_bag.png', title: 'Blue bag', description: 'Cardboard and brown paper'),
+                  RecyclingItem(imageUrl: 'assets/bins/black_box.png', title: 'Black box', description: 'Glass, paper, and others'),
+                ],
+              ),
             ),
             SizedBox(height: 20),
             Text(
               '15 RECYCLING FUN FACTS!',
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
-            SizedBox(
-              height: 200,
-              child: RecyclingFactsCarousel(),
+            SizedBox(height: 20),
+            Center(
+              child: Image.asset('assets/arrow/arrow.png', width: 158, height: 79), 
             ),
+            SizedBox(height: 10),
+            RecyclingFactsCarousel(),
           ],
         ),
       ),
@@ -82,28 +70,19 @@ class RecyclingItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 20),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Image.asset(imageUrl, width: 80, height: 80), 
-          SizedBox(width: 10),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                title,
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
-              ),
-              Text(description),
-            ],
-          ),
-        ],
-      ),
+    return Column(
+      children: [
+        Image.asset(imageUrl, width: 100, height: 100),
+        Text(
+          title,
+          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
+        ),
+        Text(description, textAlign: TextAlign.center),
+      ],
     );
   }
 }
+
 
 class RecyclingFactsCarousel extends StatelessWidget {
   final List<String> imagePaths = List.generate(
@@ -114,7 +93,7 @@ class RecyclingFactsCarousel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 250, 
+      height: 568, 
       child: PageView.builder(
         itemCount: imagePaths.length,
         itemBuilder: (context, index) {
@@ -122,6 +101,8 @@ class RecyclingFactsCarousel extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             child: Image.asset(
               imagePaths[index],
+              width: 568,
+              height: 568,
               fit: BoxFit.cover, 
             ),
           );
