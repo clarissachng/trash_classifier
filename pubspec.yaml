@@ -33,7 +33,7 @@ dependencies:
 
   http: ^1.1.0
   image_picker: ^1.0.4
-  intl: ^0.18.1
+  intl: any
 
   fl_chart: ^0.63.0
 
