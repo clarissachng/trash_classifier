@@ -82,9 +82,9 @@ class DrawerMenu extends StatelessWidget {
             padding: const EdgeInsets.all(16.0),
             child: IconButton(
               icon: Image.asset(
-                'assets/icons-added/settings-icon.png', // Path to your custom icon
-                width: 24, // Adjust the size as needed
-                height: 24,
+                'assets/icon/settings-icon.png', // Path to your custom icon
+                width: 75, // Adjust the size as needed
+                height: 75,
               ),
               onPressed: () {
                 Navigator.pop(context); // Close the drawer
