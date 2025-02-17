@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../main.dart';
-import 'settings_page.dart'; // Import the settings page
+import 'settings_page.dart';
 
 class DrawerMenu extends StatelessWidget {
   const DrawerMenu({super.key});

@@ -11,6 +11,10 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
+  void setLocale(BuildContext context, Locale newLocale) {
+    // Implement setLocale
+  }
+  
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -140,6 +144,7 @@ class MainPage extends StatelessWidget {
                   _buildButton("Waste Overview", context, '/overview_page'),
                   _buildButton("Tips/Fun facts", context, '/funfact_page'),
                   const Spacer(),
+
                 ],
               ),
             ),
