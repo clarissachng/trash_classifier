@@ -199,9 +199,25 @@ class _OverviewPageState extends State<OverviewPage> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text(
-                            'ACHIEVEMENTS',
-                            style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                          Container(
+                            decoration: BoxDecoration(
+                              image: DecorationImage(
+                                image: AssetImage('assets/widgets/black-btn.png'),
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                            padding: const EdgeInsets.all(16),
+                            child: const Center(
+                              child: Text(
+                                'Achievements',
+                                style: TextStyle(
+                                  fontFamily: 'Simpsonfont',
+                                  fontSize: 24,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ),
                           ),
                           const SizedBox(height: 12),
                           if (achievements.isEmpty)
@@ -245,7 +261,7 @@ class _OverviewPageState extends State<OverviewPage> {
                 child: IconButton(
                   icon: Image.asset(
                     'assets/widgets/menu-icon.png',
-                    width: 75, // Keep the size
+                    width: 70, // Keep the size
                   ),
                   onPressed: () => _navigateToDrawer(context),
                 ),
@@ -262,7 +278,7 @@ class _OverviewPageState extends State<OverviewPage> {
                 child: IconButton(
                   icon: Image.asset(
                     'assets/icon/settings-icon.png',
-                    height: 75,
+                    height: 70,
                   ),
                   onPressed: () => _navigateToSettings(context),
                 ),
