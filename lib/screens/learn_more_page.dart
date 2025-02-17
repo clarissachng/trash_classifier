@@ -22,7 +22,7 @@ class LearnMorePage extends StatelessWidget {
             const SizedBox(height: 10),
             Center(
               child: Image.asset(
-                'assets/images/brown_bin.png', // Ensure image exists
+                'assets/bin/brown_bin.png', // Ensure image exists
                 height: 100,
               ),
             ),
@@ -53,21 +53,62 @@ class LearnMorePage extends StatelessWidget {
               "- Proper waste disposal techniques.\n- Alternatives for composting.\n- How to minimize waste impact.",
             ),
             const SizedBox(height: 30),
+            // Understood Button with Image Background
             Center(
-              child: ElevatedButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.black,
-                  padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 40),
-                ),
-                child: const Text(
-                  "Understood!",
-                  style: TextStyle(fontSize: 18, color: Colors.white),
-                ),
+              child: Stack(
+                alignment: Alignment.center,
+                children: [
+                  Image.asset(
+                    'assets/widgets/black-btn.png',
+                    height: 60,
+                  ),
+                  ElevatedButton(
+                    onPressed: () {
+                      Navigator.pushNamed(context, '/overview_page');
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.transparent,
+                      shadowColor: Colors.transparent,
+                      padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 40),
+                    ),
+                    child: const Text(
+                      "Understood!",
+                      style: TextStyle(fontSize: 18, color: Colors.white),
+                    ),
+                  ),
+                ],
               ),
             ),
+
+            const SizedBox(height: 20),
+
+            // Wrong Object or Material Button with Image Background
+            Center(
+              child: Stack(
+                alignment: Alignment.center,
+                children: [
+                  Image.asset(
+                    'assets/widgets/outlined-btn.png', // Ensure image exists
+                    height: 60,
+                  ),
+                  ElevatedButton(
+                    onPressed: () {
+                      // Define functionality for wrong material/object
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.transparent,
+                      shadowColor: Colors.transparent,
+                      padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 40),
+                    ),
+                    child: const Text(
+                      "Wrong object or material?",
+                      style: TextStyle(fontSize: 18, color: Colors.black),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+
           ],
         ),
       ),
