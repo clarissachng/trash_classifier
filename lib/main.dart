@@ -11,6 +11,10 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
+  void setLocale(BuildContext context, Locale newLocale) {
+    // Implement setLocale
+  }
+  
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -141,24 +145,6 @@ class MainPage extends StatelessWidget {
                   _buildButton("Tips/Fun facts", context, '/funfact_page'),
                   const Spacer(),
 
-                  // Panda illustration moved to the right
-                  Align(
-                    alignment: Alignment.bottomRight,
-                    child: Image.asset(
-                      'assets/character/panda.png',
-                      height: 180,
-                      fit: BoxFit.contain,
-                    ),
-                  ),
-
-                  // Settings icon replaced with specific image
-                  Align(
-                    alignment: Alignment.bottomLeft,
-                    child: IconButton(
-                      icon: Image.asset('assets/icon/settings-icon.png', height: 30),
-                      onPressed: () {},
-                    ),
-                  ),
                 ],
               ),
             ),
