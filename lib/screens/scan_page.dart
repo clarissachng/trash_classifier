@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
+import 'learn_more_page.dart';
 
 class ScanPage extends StatefulWidget {
   const ScanPage({super.key});
@@ -20,7 +21,7 @@ class _ScanPageState extends State<ScanPage> {
 
   Future<void> _initializeCamera() async {
     cameras = await availableCameras();
-    _controller = CameraController(cameras![0], ResolutionPreset.medium);
+    _controller = CameraController(cameras![0], ResolutionPreset.medium, enableAudio: false);
     await _controller!.initialize();
     if (!mounted) return;
     setState(() {});
@@ -41,8 +42,6 @@ class _ScanPageState extends State<ScanPage> {
       ),
       body: Stack(
         children: [
-          // Centered Camera Preview
-          // Positioned Camera Preview
           Positioned(
             top: MediaQuery.of(context).size.height * 0.1, // Adjust to move up/down
             left: MediaQuery.of(context).size.width * 0.1,
@@ -67,20 +66,68 @@ class _ScanPageState extends State<ScanPage> {
           ),
 
 
-          // Capture Button
+          // Scan My Waste Button
           Positioned(
             top: MediaQuery.of(context).size.height * 0.50,
-            left: 20, // Centers the button
+            left: 20,
             right: 20,
-            child: ElevatedButton(
-              onPressed: () {},
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.black,
-                padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 40),
+            child: GestureDetector(
+              onTap: () {
+                // Define your scan functionality here
+              },
+              child: Stack(
+                alignment: Alignment.center,
+                children: [
+                  Image.asset(
+                    'assets/widgets/black-btn.png',
+                    height: 50,
+                  ),
+                  const Text(
+                    "Scan My Waste",
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                    ),
+                  ),
+                ],
               ),
-              child: const Text("Scan My Waste", style: TextStyle(fontSize: 18, color: Colors.white)),
             ),
           ),
+
+
+          // Learn More Button
+          Positioned(
+            bottom: 100,
+            left: MediaQuery.of(context).size.width * 0.3,
+            right: MediaQuery.of(context).size.width * 0.3,
+            child: GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const LearnMorePage()),
+                );
+              },
+              child: Stack(
+                alignment: Alignment.center,
+                children: [
+                  Image.asset(
+                    'assets/widgets/outlined-btn.png',
+                    height: 60,
+                  ),
+                  const Text(
+                    "Learn More",
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+
 
           // Settings Button (Bottom Left)
           Positioned(

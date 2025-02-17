@@ -33,6 +33,7 @@ dependencies:
 
   http: ^1.1.0
   image_picker: ^1.0.4
+  intl: ^0.18.1
 
   fl_chart: ^0.63.0
 
@@ -68,6 +69,7 @@ flutter:
     - assets/background/
     - assets/icon/
     - assets/widgets/
+    - assets/bin/
   fonts:
     - family: Simpsonfont
       fonts:
