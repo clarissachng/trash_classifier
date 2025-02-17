@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'screens/scan_page.dart';
 import 'overview_page.dart';
+import 'funfact_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -21,6 +22,7 @@ class MyApp extends StatelessWidget {
         '/': (context) => const MainPage(),
         '/scan_page': (context) => const ScanPage(),
         '/overview_page': (context) => OverviewPage(userId: 'test_user'),
+        '/funfact_page': (context) => Funfact(),
       },
     );
   }
@@ -104,8 +106,7 @@ class MainPage extends StatelessWidget {
                   ),
                   _buildButton("Scan my waste", context, '/scan_page'),
                   _buildButton("Waste Overview", context, '/overview_page'),
-                  _buildButton("Tips/Fun facts", context),
-
+                  _buildButton("Tips/Fun facts", context, '/funfact_page'),
                   const Spacer(),
 
                   // Panda illustration moved to the right
