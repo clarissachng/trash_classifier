@@ -10,6 +10,10 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
+  void setLocale(BuildContext context, Locale newLocale) {
+    // Implement setLocale
+  }
+  
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
