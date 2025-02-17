@@ -1,0 +1,2 @@
+C:/Z/Yan/AI-Powered-Trash-Classifier/android/app/.cxx/Debug/mlb1i1w1/x86/CMakeFiles/edit_cache.dir
+C:/Z/Yan/AI-Powered-Trash-Classifier/android/app/.cxx/Debug/mlb1i1w1/x86/CMakeFiles/rebuild_cache.dir

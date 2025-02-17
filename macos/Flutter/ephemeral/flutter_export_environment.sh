@@ -1,7 +1,7 @@
 #!/bin/sh
 # This is a generated file; do not edit or check into version control.
-export "FLUTTER_ROOT=/Users/clarissachng/development/flutter"
-export "FLUTTER_APPLICATION_PATH=/Users/clarissachng/Desktop/Bristol/ai_powered_trash_classifier"
+export "FLUTTER_ROOT=C:\Z\Yan\flutter_windows_3.7.12-stable\flutter"
+export "FLUTTER_APPLICATION_PATH=C:\Z\Yan\AI-Powered-Trash-Classifier"
 export "COCOAPODS_PARALLEL_CODE_SIGN=true"
 export "FLUTTER_BUILD_DIR=build"
 export "FLUTTER_BUILD_NAME=1.0.0"

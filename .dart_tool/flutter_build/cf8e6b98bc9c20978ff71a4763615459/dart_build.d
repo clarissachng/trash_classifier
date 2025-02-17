@@ -1,0 +1,1 @@
+ C:\\Z\\Yan\\AI-Powered-Trash-Classifier\\.dart_tool\\flutter_build\\cf8e6b98bc9c20978ff71a4763615459\\dart_build_result.json: 
