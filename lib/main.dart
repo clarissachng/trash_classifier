@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'screens/scan_page.dart';
 import 'overview_page.dart';
 import 'funfact_page.dart';
+import 'widget/settings_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,7 +17,15 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         fontFamily: 'RinsHandwriting',
+        colorScheme: ColorScheme.light(
+          primary: Color(0xFF262626), // Black
+          onPrimary: Colors.white,
+          // background: Color(0xFFFEFFFB), // White
+          // onBackground: Color(0xFF262626), // Black text on white background
       ),
+        scaffoldBackgroundColor: Color(0xFFFEFFFB)
+      ),
+
       initialRoute: '/',
       routes: {
         '/': (context) => const MainPage(),
@@ -40,23 +49,44 @@ class MainPage extends StatelessWidget {
           // Big Tree (Left)
           Positioned(
             left: 0,
-            top: 100,
+            top: 90,
             child: Image.asset(
               'assets/background/big_tree.png',
-              height: 200,
+              height: 300,
               fit: BoxFit.contain,
             ),
           ),
           // Small Tree (Right)
           Positioned(
-            right: 0,
-            top: 100,
+            right: 20,
+            top: 90,
             child: Image.asset(
               'assets/background/small_tree.png',
-              height: 300,
+              height: 350,
               fit: BoxFit.contain,
             ),
           ),
+
+          Positioned(
+            right: 0,
+            bottom: 0,
+            child: Image.asset(
+              'assets/character/panda.png',
+              height: 280,
+              fit: BoxFit.contain,
+            ),
+          ),
+
+           // Settings icon replaced with specific image
+          Positioned(
+            left: 20,
+            bottom:20,
+            child: IconButton(
+              icon: Image.asset('assets/icon/settings-icon.png', height: 75),
+              onPressed: () => _navigateToSettings(context),
+            ),
+          ),
+
           SafeArea(
             child: Padding(
               padding: const EdgeInsets.all(20.0),
@@ -68,9 +98,9 @@ class MainPage extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       const Text(
-                        "Hello, John",
+                        "Hello, User",
                         style: TextStyle(
-                          fontSize: 24,
+                          fontSize: 30,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
@@ -85,10 +115,12 @@ class MainPage extends StatelessWidget {
                   // Trash Classifier Text
                   Container(
                     width: double.infinity,
-                    height: 50,
+                    height: 80,
                     decoration: BoxDecoration(
-                      color: Colors.black,
-                      borderRadius: BorderRadius.circular(10),
+                      image: const DecorationImage(
+                        image: AssetImage('assets/widgets/black-btn.png'),
+                        fit: BoxFit.cover,
+                      ),
                     ),
                     child: const SizedBox(
                       child: Center(
@@ -96,7 +128,7 @@ class MainPage extends StatelessWidget {
                         "TRASH CLASSIFIER",
                         style: TextStyle(
                           fontFamily: 'Simpsonfont',
-                          fontSize: 30,
+                          fontSize: 35,
                           fontWeight: FontWeight.bold,
                           color: Colors.white,
                         ),
@@ -137,45 +169,50 @@ class MainPage extends StatelessWidget {
   }
 }
 
+  void _navigateToSettings(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => SettingsPage()),
+    );
+  }
+
 Widget _buildButton(String text, BuildContext context, [String? route]) {
   return Padding(
-    padding: const EdgeInsets.symmetric(vertical: 8.0),
+    padding: const EdgeInsets.symmetric(vertical: 16.0), // Increased vertical padding
     child: SizedBox(
       width: double.infinity,
-      height: 50,
-      child: Stack(
-        children: [
-          Positioned.fill(
-            child: Image.asset(
-              'assets/widgets/outlined-btn.png', // Ensure this file exists
-              fit: BoxFit.cover,
-            ),
-          ),
-          Positioned.fill(
-            child: ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.transparent,
-                shadowColor: Colors.transparent,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10),
-                  side: const BorderSide(color: Colors.black, width: 2),
-                ),
+      height: 80, // Increased height for larger buttons
+      child: InkWell(
+        onTap: () {
+          if (route != null && route.isNotEmpty) {
+            Navigator.pushNamed(context, route);
+          }
+        },
+        child: Stack(
+          children: [
+            // Use your image as the button background
+            Positioned.fill(
+              child: Image.asset(
+                'assets/widgets/outlined-btn.png', // Ensure this file exists
+                fit: BoxFit.cover,
               ),
-              onPressed: () {
-                if (route != null && route.isNotEmpty) {
-                  Navigator.pushNamed(context, route);
-                }
-              },
-              child: Text(
-                text,
-                style: const TextStyle(
-                  color: Colors.black,
-                  fontSize: 30,
+            ),
+            // Center the text with increased padding
+            Center(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 24.0), // Increased padding
+                child: Text(
+                  text,
+                  style: const TextStyle(
+                    color: Colors.black,
+                    fontSize: 40,
+                    fontWeight: FontWeight.bold, // Optional: Add bold text
+                  ),
                 ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     ),
   );
