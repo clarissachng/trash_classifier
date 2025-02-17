@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'screens/scan_page.dart';
+import 'overview_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -14,7 +16,12 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         fontFamily: 'RinsHandwriting',
       ),
-      home: const MainPage(),
+      initialRoute: '/',
+      routes: {
+        '/': (context) => const MainPage(),
+        '/scan_page': (context) => const ScanPage(),
+        '/overview_page': (context) => OverviewPage(userId: 'test_user'),
+      },
     );
   }
 }
@@ -95,8 +102,8 @@ class MainPage extends StatelessWidget {
                       ),
                     ),
                   ),
-                  _buildButton("Scan my waste", context),
-                  _buildButton("Waste Overview", context),
+                  _buildButton("Scan my waste", context, '/scan_page'),
+                  _buildButton("Waste Overview", context, '/overview_page'),
                   _buildButton("Tips/Fun facts", context),
 
                   const Spacer(),
@@ -129,7 +136,7 @@ class MainPage extends StatelessWidget {
   }
 }
 
-Widget _buildButton(String text, BuildContext context) {
+Widget _buildButton(String text, BuildContext context, [String? route]) {
   return Padding(
     padding: const EdgeInsets.symmetric(vertical: 8.0),
     child: SizedBox(
@@ -137,25 +144,27 @@ Widget _buildButton(String text, BuildContext context) {
       height: 50,
       child: Stack(
         children: [
-          // Background Image
           Positioned.fill(
             child: Image.asset(
               'assets/widgets/outlined-btn.png', // Ensure this file exists
               fit: BoxFit.cover,
             ),
           ),
-          // Transparent Button with Text
           Positioned.fill(
             child: ElevatedButton(
               style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.transparent, // Make button background transparent
-                shadowColor: Colors.transparent, // Remove shadow
+                backgroundColor: Colors.transparent,
+                shadowColor: Colors.transparent,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10),
                   side: const BorderSide(color: Colors.black, width: 2),
                 ),
               ),
-              onPressed: () {},
+              onPressed: () {
+                if (route != null && route.isNotEmpty) {
+                  Navigator.pushNamed(context, route);
+                }
+              },
               child: Text(
                 text,
                 style: const TextStyle(
@@ -170,4 +179,5 @@ Widget _buildButton(String text, BuildContext context) {
     ),
   );
 }
+
 
