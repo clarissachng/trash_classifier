@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
+import 'package:intl/intl.dart';
 
 class OverviewPage extends StatefulWidget {
   final String userId;
@@ -14,6 +15,7 @@ class _OverviewPageState extends State<OverviewPage> {
   Map<String, int> categorySummary = {};
   List<String> achievements = [];
   String? selectedMonth;
+  String? currentYear;
 
   final ScrollController _scrollController = ScrollController();
 
@@ -33,6 +35,11 @@ class _OverviewPageState extends State<OverviewPage> {
       {"month": "2024-05", "total": 18},
       {"month": "2024-06", "total": 20},
     ];
+
+    // Set current year from monthly data
+    currentYear = monthlySummary.isNotEmpty
+        ? monthlySummary.first['month'].split('-')[0]
+        : DateTime.now().year.toString();
 
     // Achievements (Fake Data)
     achievements = [
@@ -61,6 +68,11 @@ class _OverviewPageState extends State<OverviewPage> {
     setState(() {});
   }
 
+  String getMonthName(String month) {
+    final DateTime parsedDate = DateTime.parse('$month-01');
+    return DateFormat('MMMM').format(parsedDate);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -83,9 +95,10 @@ class _OverviewPageState extends State<OverviewPage> {
               padding: const EdgeInsets.all(16),
               child: Column(
                 children: [
-                  const Text(
-                    'WASTE LOG',
-                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                  Text(
+                    '$currentYear Monthly Overview',
+                    style: const TextStyle(
+                        fontSize: 24, fontWeight: FontWeight.bold),
                   ),
                   const SizedBox(height: 12),
                   const Text(
@@ -100,7 +113,7 @@ class _OverviewPageState extends State<OverviewPage> {
                   if (selectedMonth != null) ...[
                     const SizedBox(height: 20),
                     Text(
-                      'Category Breakdown for $selectedMonth',
+                      '${getMonthName(selectedMonth!)} Category Breakdown',
                       style: const TextStyle(
                           fontSize: 18, fontWeight: FontWeight.bold),
                     ),
@@ -188,8 +201,29 @@ class _OverviewPageState extends State<OverviewPage> {
           topTitles: const AxisTitles(
             sideTitles: SideTitles(showTitles: false), // No top titles
           ),
-          bottomTitles: const AxisTitles(
-            sideTitles: SideTitles(showTitles: false), // No X-axis annotations
+          bottomTitles: AxisTitles(
+            sideTitles: SideTitles(
+              showTitles: true,
+              getTitlesWidget: (value, meta) {
+                int monthIndex = value.toInt();
+                if (monthIndex >= 1 && monthIndex <= 12) {
+                  const months = [
+                    '', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+                    'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
+                  ];
+                  return Padding(
+                    padding: const EdgeInsets.only(top: 5),
+                    child: Text(
+                      months[monthIndex],
+                      style: const TextStyle(fontSize: 10),
+                    ),
+                  );
+                }
+                return const Text('');
+              },
+              interval: 1,
+              reservedSize: 22,
+            ),
           ),
         ),
         barTouchData: BarTouchData(
@@ -209,11 +243,13 @@ class _OverviewPageState extends State<OverviewPage> {
   }
 
   Widget buildCategoryBarChart() {
+    List<String> categoryKeys = categorySummary.keys.toList();
+
     return BarChart(
       BarChartData(
         barGroups: categorySummary.entries.map((entry) {
           return BarChartGroupData(
-            x: categorySummary.keys.toList().indexOf(entry.key),
+            x: categoryKeys.indexOf(entry.key),
             barRods: [
               BarChartRodData(
                 toY: entry.value.toDouble(),
@@ -238,8 +274,25 @@ class _OverviewPageState extends State<OverviewPage> {
           topTitles: const AxisTitles(
             sideTitles: SideTitles(showTitles: false), // No top titles
           ),
-          bottomTitles: const AxisTitles(
-            sideTitles: SideTitles(showTitles: false), // No X-axis labels
+          bottomTitles: AxisTitles(
+            sideTitles: SideTitles(
+              showTitles: true,
+              getTitlesWidget: (value, meta) {
+                if (value.toInt() >= 0 &&
+                    value.toInt() < categoryKeys.length) {
+                  return Padding(
+                    padding: const EdgeInsets.only(top: 5),
+                    child: Text(
+                      categoryKeys[value.toInt()],
+                      style: const TextStyle(fontSize: 8),
+                    ),
+                  );
+                }
+                return const Text('');
+              },
+              interval: 1,
+              reservedSize: 40,
+            ),
           ),
         ),
       ),
