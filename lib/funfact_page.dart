@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import '../widget/drawer_menu.dart';
+import '../widget/settings_page.dart';
 
 void main() {
   runApp(Funfact());
@@ -10,7 +12,7 @@ class Funfact extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-      fontFamily: 'RinsHandwriting',
+        fontFamily: 'RinsHandwriting',
     ),
       home: RecyclingPage(),
     );
@@ -24,26 +26,71 @@ class RecyclingPage extends StatefulWidget {
 
 class _RecyclingPageState extends State<RecyclingPage> {
   final PageController _pageController = PageController();
+  final ScrollController _scrollController = ScrollController();
+  bool _isBottom = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _scrollController.addListener(() {
+      if (_scrollController.position.atEdge) {
+        if (_scrollController.position.pixels != 0) {
+          setState(() {
+            _isBottom = true;
+          });
+        } else {
+          setState(() {
+            _isBottom = false;
+          });
+        }
+      } else {
+        setState(() {
+          _isBottom = false;
+        });
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          'How to Sort Your Recyclables',
-          style: TextStyle(
-            fontSize: 28,
-            fontFamily: 'RinsHandwriting',
-            fontWeight: FontWeight.bold, 
-            ),
-        ),
-        centerTitle: true,
-      ),
-      body: SingleChildScrollView(
-        child: Column(
+      backgroundColor: Colors.grey[200],
+      body: Stack(
+        children: [
+          SingleChildScrollView(
+          controller: _scrollController,
+          child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            SizedBox(height: 10),
+            // Top Right Menu Icon
+              Align(
+                alignment: Alignment.topRight,
+                child: Padding(
+              padding: const EdgeInsets.all(16.0), 
+                child: IconButton(
+                  icon: Image.asset(
+                    'assets/widgets/menu-icon.png',
+                    width: 75,
+                  ),
+                  onPressed: () => _navigateToDrawer(context), 
+                ),
+              ),
+            ),
+            
+            Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 40), 
+                  child: Text(
+                    'How to Sort Your Recyclables',
+                    textAlign: TextAlign.center, 
+                    style: TextStyle(
+                      fontSize: 36,
+                      fontFamily: 'Simpsonfont',
+                      fontWeight: FontWeight.bold,
+                    ),
+                    softWrap: true, 
+                  ),
+                ),
+        SizedBox(height: 20),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: GridView.builder(
@@ -52,7 +99,7 @@ class _RecyclingPageState extends State<RecyclingPage> {
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2, 
                   mainAxisSpacing: 10, 
-                  crossAxisSpacing: 20, 
+                  crossAxisSpacing: 10, 
                   childAspectRatio: 1, 
                 ),
                 itemCount: 6,
@@ -70,14 +117,19 @@ class _RecyclingPageState extends State<RecyclingPage> {
               ),
             ),
             SizedBox(height: 20),
-            Text(
-              '15 RECYCLING FUN FACTS!',
-              style: TextStyle(
-                fontSize: 28,
-                fontWeight: FontWeight.bold, 
-                fontFamily: 'RinsHandwriting',
-              ),
-            ),
+            Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 40), 
+                  child: Text(
+                    '15 RECYCLING FUN FACTS!',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 36,
+                      fontWeight: FontWeight.bold,
+                      fontFamily: 'Simpsonfont',
+                    ),
+                    softWrap: true, 
+                  ),
+                ),
             SizedBox(height: 20),
             Stack(
               alignment: Alignment.center,
@@ -138,10 +190,37 @@ class _RecyclingPageState extends State<RecyclingPage> {
                 ),
               ],
             ),
-            SizedBox(height: 10),
+            SizedBox(height: 100),
           ],
         ),
       ),
+      // Settings Button (Bottom Left)
+          if (_isBottom)
+            Positioned(
+              bottom: 20,
+              left: 20,
+              child: IconButton(
+                icon: Image.asset('assets/icon/settings-icon.png', height: 75), 
+                onPressed: () {
+                  _navigateToSettings(context);
+                },
+              ),
+            ),
+        ],
+      ),
+    );
+  }
+  void _navigateToDrawer(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => DrawerMenu()),
+    );
+  }
+
+  void _navigateToSettings(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => SettingsPage()),
     );
   }
 }
@@ -157,21 +236,32 @@ class RecyclingItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Image.asset(imageUrl, width: 100, height: 100),
-        Text(
-          title,
-          style: TextStyle(
-            fontWeight: FontWeight.normal, 
-            fontSize: 14,
-            fontFamily: 'RinsHandwriting',
+        Image.asset(imageUrl, width: 150, height: 150),
+        Flexible(
+          child: Text(
+            title,
+            style: TextStyle(
+              fontWeight: FontWeight.normal,
+              fontSize: 20,
+              fontFamily: 'RinsHandwriting',
+              height: 1,
+            ),
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis, 
           ),
         ),
-        Text(
-          description,
-          textAlign: TextAlign.center,
-          style: TextStyle(
-            fontWeight: FontWeight.normal, 
-            fontFamily: 'RinsHandwriting',
+        Flexible(
+          child: Text(
+            description,
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              fontWeight: FontWeight.normal,
+              fontSize: 18,
+              fontFamily: 'RinsHandwriting',
+              height: 1,
+            ),
+            maxLines: 2, 
+            overflow: TextOverflow.ellipsis,
           ),
         ),
       ],
