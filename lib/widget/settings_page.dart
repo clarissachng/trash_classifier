@@ -1,6 +1,24 @@
 import 'package:flutter/material.dart';
-import '../main.dart'; // Import main.dart to access MyApp.of(context)
-import '../l10n/app_localizations.dart';
+import 'drawer_menu.dart'; // Import the drawer menu
+
+void main() {
+  runApp(SettingsApp());
+}
+
+class SettingsApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Settings',
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        fontFamily: 'RinsHandwriting', // Ensure this font is loaded
+        scaffoldBackgroundColor: Color(0xFFFEFFFB), // Off-white background
+      ),
+      home: SettingsPage(),
+    );
+  }
+}
 
 class SettingsPage extends StatefulWidget {
   @override
@@ -20,22 +38,26 @@ class _SettingsPageState extends State<SettingsPage> {
       int currentIndex = _languages.indexOf(_selectedLanguage);
       _selectedLanguage = _languages[(currentIndex + (next ? 1 : -1)) % _languages.length];
     });
+  }
 
-    Locale newLocale;
-    switch (_selectedLanguage) {
-      case 'EN':
-        newLocale = Locale('en');
-        break;
-      case 'CN':
-        newLocale = Locale('zh');
-        break;
-      case 'KOR':
-        newLocale = Locale('ko');
-        break;
-      default:
-        newLocale = Locale('en');
-    }
-    MyApp().setLocale(context, newLocale);
+  void _changeRegion(bool next) {
+    setState(() {
+      int currentIndex = _regions.indexOf(_selectedRegion);
+      _selectedRegion = _regions[(currentIndex + (next ? 1 : -1)) % _regions.length];
+    });
+  }
+
+  void _toggleNotifications(bool value) {
+    setState(() {
+      _notificationsEnabled = value;
+    });
+  }
+
+  void _navigateToDrawer(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => DrawerMenu()),
+    );
   }
 
   @override
@@ -47,22 +69,53 @@ class _SettingsPageState extends State<SettingsPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Center(
-                child: Text(
-                  AppLocalizations.of(context).translate("settings"),
-                  style: TextStyle(
-                    fontFamily: 'Simpsonfont',
-                    fontSize: 35,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black,
+              // Top Right Menu Icon
+              Align(
+                alignment: Alignment.topRight,
+                child: IconButton(
+                  icon: Image.asset(
+                    'assets/widgets/menu-icon.png', // Ensure you have this image
+                    width: 75,
                   ),
+                  onPressed: () => _navigateToDrawer(context), // Call your function here
                 ),
               ),
+
+              const SizedBox(height: 10),
+
+              // Settings Title (Black Button)
+              Center(
+                child: // Trash Classifier Text
+                  Container(
+                    width: 250,
+                    height: 50,
+                    decoration: BoxDecoration(
+                      image: const DecorationImage(
+                        image: AssetImage('assets/widgets/black-btn.png'),
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                    child: const SizedBox(
+                      child: Center(
+                      child: Text(
+                        "Settings",
+                        style: TextStyle(
+                          fontFamily: 'Simpsonfont',
+                          fontSize: 35,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                        ),
+                      ),
+                      ),
+                    ),
+                  ),
+              ),
+
               const SizedBox(height: 30),
 
               // Language Selection
               _buildSettingRow(
-                label: AppLocalizations.of(context).translate("language"),
+                label: "Language",
                 value: _selectedLanguage,
                 onLeftPress: () => _changeLanguage(false),
                 onRightPress: () => _changeLanguage(true),
@@ -72,20 +125,52 @@ class _SettingsPageState extends State<SettingsPage> {
 
               // Location Selection
               _buildSettingRow(
-                label: AppLocalizations.of(context).translate("location"),
+                label: "Location",
                 value: _selectedRegion,
-                onLeftPress: () {},
-                onRightPress: () {},
+                onLeftPress: () => _changeRegion(false),
+                onRightPress: () => _changeRegion(true),
               ),
 
               const SizedBox(height: 20),
 
               // Notifications Toggle
               _buildSettingRow(
-                label: AppLocalizations.of(context).translate("notifications"),
+                label: "Notifications",
                 value: _notificationsEnabled ? "On" : "Off",
-                onLeftPress: () {},
-                onRightPress: () {},
+                onLeftPress: () => _toggleNotifications(!_notificationsEnabled),
+                onRightPress: () => _toggleNotifications(!_notificationsEnabled),
+              ),
+
+              const SizedBox(height: 40),
+
+              // Send Feedback Button
+              Align(
+                alignment: Alignment.centerLeft,
+                child: TextButton(
+                  onPressed: () {
+                    // Feedback action here
+                  },
+                  child: const Text(
+                    "SEND FEEDBACK",
+                    style: TextStyle(
+                      fontFamily: 'RinsHandwriting',
+                      fontSize: 40,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black,
+                    ),
+                  ),
+                ),
+              ),
+
+              const Spacer(),
+
+              // Bottom Left Gear Icon
+              Align(
+                alignment: Alignment.bottomLeft,
+                child: Image.asset(
+                  'assets/widgets/settings-icon.png', // Ensure this image is available
+                  width: 75,
+                ),
               ),
             ],
           ),
@@ -94,6 +179,7 @@ class _SettingsPageState extends State<SettingsPage> {
     );
   }
 
+  // Widget to Build Each Setting Row
   Widget _buildSettingRow({
     required String label,
     required String value,
@@ -103,12 +189,34 @@ class _SettingsPageState extends State<SettingsPage> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(label, style: TextStyle(fontSize: 20)),
+        Text(
+          label,
+          style: const TextStyle(
+            fontFamily: 'RinsHandwriting',
+            fontSize: 35,
+            color: Colors.black,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
         Row(
           children: [
-            IconButton(icon: Icon(Icons.arrow_left), onPressed: onLeftPress),
-            Text(value),
-            IconButton(icon: Icon(Icons.arrow_right), onPressed: onRightPress),
+            IconButton(
+              icon: const Icon(Icons.arrow_left, size: 20),
+              onPressed: onLeftPress,
+            ),
+            Text(
+              value,
+              style: const TextStyle(
+                fontFamily: 'RinsHandwriting',
+                fontSize: 35,
+                decoration: TextDecoration.underline,
+                color: Colors.black,
+              ),
+            ),
+            IconButton(
+              icon: const Icon(Icons.arrow_right, size: 20),
+              onPressed: onRightPress,
+            ),
           ],
         ),
       ],
