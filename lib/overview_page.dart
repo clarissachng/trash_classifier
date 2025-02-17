@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:intl/intl.dart';
+import '../widget/drawer_menu.dart';
+import '../widget/settings_page.dart';
 
 class OverviewPage extends StatefulWidget {
   final String userId;
@@ -77,100 +79,143 @@ class _OverviewPageState extends State<OverviewPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Waste Log & Achievements'),
+        title: const Text(''),
       ),
-      body: Scrollbar(
-        thumbVisibility: true,
-        controller: _scrollController,
-        thickness: 8,
-        radius: const Radius.circular(10),
-        child: ListView(
-          controller: _scrollController,
-          physics: const BouncingScrollPhysics(),
-          padding: const EdgeInsets.all(16),
-          children: [
-            // Waste Log Section
-            Container(
-              color: Colors.grey[200],
+      body: Stack(
+        children: [
+          Scrollbar(
+            thumbVisibility: true,
+            controller: _scrollController,
+            thickness: 8,
+            radius: const Radius.circular(10),
+            child: ListView(
+              controller: _scrollController,
+              physics: const BouncingScrollPhysics(),
               padding: const EdgeInsets.all(16),
-              child: Column(
-                children: [
-                  Text(
-                    '$currentYear Monthly Overview',
-                    style: const TextStyle(
-                        fontSize: 24, fontWeight: FontWeight.bold),
-                  ),
-                  const SizedBox(height: 12),
-                  const Text(
-                    'Monthly Overview (Tap a Bar for Details)',
-                    style: TextStyle(fontSize: 16),
-                  ),
-                  const SizedBox(height: 16),
-                  SizedBox(
-                    height: 250,
-                    child: buildMonthlyBarChart(),
-                  ),
-                  if (selectedMonth != null) ...[
-                    const SizedBox(height: 20),
-                    Text(
-                      '${getMonthName(selectedMonth!)} Category Breakdown',
-                      style: const TextStyle(
-                          fontSize: 18, fontWeight: FontWeight.bold),
-                    ),
-                    const SizedBox(height: 10),
-                    SizedBox(
-                      height: 200,
-                      child: buildCategoryBarChart(),
-                    ),
-                  ],
-                ],
-              ),
-            ),
+              children: [
+                // Waste Log Section
+                Container(
+                  color: Colors.grey[200],
+                  padding: const EdgeInsets.all(16),
+                  child: Column(
+                    children: [
 
-            // Achievements Section (Below)
-            Container(
-              color: Colors.white,
-              padding: const EdgeInsets.all(16),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Text(
-                    'ACHIEVEMENTS',
-                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-                  ),
-                  const SizedBox(height: 12),
-                  if (achievements.isEmpty)
-                    const Center(child: Text('No achievements yet.')),
-                  if (achievements.isNotEmpty)
-                    ListView.builder(
-                      itemCount: achievements.length,
-                      shrinkWrap: true,
-                      physics: const NeverScrollableScrollPhysics(),
-                      itemBuilder: (context, index) {
-                        return Card(
-                          margin: const EdgeInsets.symmetric(vertical: 8),
-                          child: ListTile(
-                            leading: const Icon(Icons.star, color: Colors.amber),
-                            title: Text(
-                              achievements[index],
-                              style: const TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
+                      // Waste Log & Achievements Title Box
+                      Container(
+                        color: Colors.grey[300], // Background color for the title box
+                        padding: const EdgeInsets.all(16),
+                        child: const Text(
+                          'Waste Log & Achievements',
+                          style: TextStyle(
+                            fontSize: 24,
+                            fontWeight: FontWeight.bold,
                           ),
-                        );
-                      },
-                    ),
-                ],
-              ),
+                        ),
+                      ),
+
+                      Text(
+                        '$currentYear Monthly Overview',
+                        style: const TextStyle(
+                            fontSize: 24, fontWeight: FontWeight.bold),
+                      ),
+                      const SizedBox(height: 12),
+                      const Text(
+                        'Monthly Overview (Tap a Bar for Details)',
+                        style: TextStyle(fontSize: 16),
+                      ),
+                      const SizedBox(height: 16),
+                      SizedBox(
+                        height: 250,
+                        child: buildMonthlyBarChart(),
+                      ),
+                      if (selectedMonth != null) ...[
+                        const SizedBox(height: 20),
+                        Text(
+                          '${getMonthName(selectedMonth!)} Category Breakdown',
+                          style: const TextStyle(
+                              fontSize: 18, fontWeight: FontWeight.bold),
+                        ),
+                        const SizedBox(height: 10),
+                        SizedBox(
+                          height: 200,
+                          child: buildCategoryBarChart(),
+                        ),
+                      ],
+                    ],
+                  ),
+                ),
+
+                // Achievements Section (Below)
+                Container(
+                  color: Colors.white,
+                  padding: const EdgeInsets.all(16),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text(
+                        'ACHIEVEMENTS',
+                        style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                      ),
+                      const SizedBox(height: 12),
+                      if (achievements.isEmpty)
+                        const Center(child: Text('No achievements yet.')),
+                      if (achievements.isNotEmpty)
+                        ListView.builder(
+                          itemCount: achievements.length,
+                          shrinkWrap: true,
+                          physics: const NeverScrollableScrollPhysics(),
+                          itemBuilder: (context, index) {
+                            return Card(
+                              margin: const EdgeInsets.symmetric(vertical: 8),
+                              child: ListTile(
+                                leading: const Icon(Icons.star, color: Colors.amber),
+                                title: Text(
+                                  achievements[index],
+                                  style: const TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ),
+                            );
+                          },
+                        ),
+                    ],
+                  ),
+                ),
+              ],
             ),
-          ],
-        ),
+          ),
+
+          // Top Right Menu Icon
+          Positioned(
+            top: 20,
+            right: 20,
+            child: IconButton(
+              icon: Image.asset(
+                'assets/widgets/menu-icon.png',
+                width: 75,
+              ),
+              onPressed: () => _navigateToDrawer(context),
+            ),
+          ),
+
+          // Settings Button (Bottom Left)
+          Positioned(
+            bottom: 20,
+            left: 20,
+            child: IconButton(
+              icon: Image.asset(
+                'assets/icon/settings-icon.png',
+                height: 75,
+              ),
+              onPressed: () => _navigateToSettings(context),
+            ),
+          ),
+        ],
       ),
     );
   }
-
   Widget buildMonthlyBarChart() {
     return BarChart(
       BarChartData(
@@ -299,3 +344,19 @@ class _OverviewPageState extends State<OverviewPage> {
     );
   }
 }
+
+// Navigation functions
+  void _navigateToDrawer(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => DrawerMenu()),
+    );
+  }
+
+  void _navigateToSettings(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => SettingsPage()),
+    );
+  }
+
