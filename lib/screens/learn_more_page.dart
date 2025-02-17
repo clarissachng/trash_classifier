@@ -148,9 +148,10 @@ class LearnMorePage extends StatelessWidget {
             ),
 
             // Top Right Menu Icon
-            Positioned(
-              top: 20,
-              right: 20,
+            Align(
+              alignment: Alignment.topRight,
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
               child: IconButton(
                 icon: Image.asset(
                   'assets/widgets/menu-icon.png',
@@ -159,11 +160,14 @@ class LearnMorePage extends StatelessWidget {
                 onPressed: () => _navigateToDrawer(context),
               ),
             ),
+          ),
+        
 
             // Settings Button (Bottom Left)
-            Positioned(
-              bottom: 20,
-              left: 20,
+            Align(
+              alignment: Alignment.bottomLeft,
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
               child: IconButton(
                 icon: Image.asset(
                   'assets/icon/settings-icon.png',
@@ -172,6 +176,7 @@ class LearnMorePage extends StatelessWidget {
                 onPressed: () => _navigateToSettings(context),
               ),
             ),
+          ),
           ],
         ),
       ),
