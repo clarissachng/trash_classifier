@@ -68,6 +68,7 @@ flutter:
     - assets/background/
     - assets/icon/
     - assets/widgets/
+    - assets/bin/
   fonts:
     - family: Simpsonfont
       fonts:
