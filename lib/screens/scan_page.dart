@@ -146,6 +146,50 @@ class _ScanPageState extends State<ScanPage> {
             ),
 
             // Learn More Button (Initially Hidden)
+            // if (_showLearnMore)
+            //   Positioned(
+            //     bottom: 150,
+            //     left: MediaQuery.of(context).size.width * 0.3,
+            //     right: MediaQuery.of(context).size.width * 0.3,
+            //     child: GestureDetector(
+            //       onTap: () {
+            //         Navigator.push(
+            //           context,
+            //           MaterialPageRoute(builder: (context) => const LearnMorePage()),
+            //         );
+            //       },
+            //       child: Stack(
+            //         alignment: Alignment.center,
+            //         children: [
+            //           Image.asset(
+            //             'assets/widgets/outlined-btn.png',
+            //             height: 90,
+            //           ),
+            //           const Text(
+            //             "Learn More",
+            //             style: TextStyle(
+            //               fontSize: 35,
+            //               fontWeight: FontWeight.bold,
+            //               color: Colors.black,
+            //             ),
+            //           ),
+            //         ],
+            //       ),
+            //     ),
+            //   ),
+
+            // Settings Button (Bottom Left)
+            Positioned(
+              bottom: 20,
+              left: 20,
+              child: IconButton(
+                icon: Image.asset('assets/icon/settings-icon.png', height: 75),
+                onPressed: () {
+                  _navigateToSettings(context);
+                },
+              ),
+            ),
+            
             if (_showLearnMore)
               Positioned(
                 bottom: 150,
@@ -155,7 +199,9 @@ class _ScanPageState extends State<ScanPage> {
                   onTap: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => const LearnMorePage()),
+                      MaterialPageRoute(
+                        builder: (context) => LearnMorePage(scannedItem: _scannedItem), // Pass the scanned item
+                      ),
                     );
                   },
                   child: Stack(
@@ -177,18 +223,6 @@ class _ScanPageState extends State<ScanPage> {
                   ),
                 ),
               ),
-
-            // Settings Button (Bottom Left)
-            Positioned(
-              bottom: 20,
-              left: 20,
-              child: IconButton(
-                icon: Image.asset('assets/icon/settings-icon.png', height: 75),
-                onPressed: () {
-                  _navigateToSettings(context);
-                },
-              ),
-            ),
           ],
         ),
       ),
