@@ -44,7 +44,7 @@ class LearnMorePage extends StatelessWidget {
                   const SizedBox(height: 10),
                   Center(
                     child: Image.asset(
-                      'assets/bin/brown_bin.png', // Ensure image exists
+                      'assets/bins/green_box.png', // Ensure image exists
                       height: 200,
                     ),
                   ),
