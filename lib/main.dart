@@ -2,33 +2,40 @@ import 'package:flutter/material.dart';
 import 'screens/scan_page.dart';
 import 'overview_page.dart';
 import 'funfact_page.dart';
-import 'widget/settings_page.dart';
+import 'widgets/settings_page.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'l10n/app_localizations.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  void setLocale(BuildContext context, Locale newLocale) {
-    // Implement setLocale
-  }
-  
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      // Add localization support
+      localizationsDelegates: [
+        AppLocalizations.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: [
+        Locale('en'), // English
+        Locale('zh'), // Chinese
+        Locale('ko'), // Korean
+      ],
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        fontFamily: 'RinsHandwriting',
-        colorScheme: ColorScheme.light(
-          primary: Color(0xFF262626), // Black
-          onPrimary: Colors.white,
-          // background: Color(0xFFFEFFFB), // White
-          // onBackground: Color(0xFF262626), // Black text on white background
-      ),
-        scaffoldBackgroundColor: Color(0xFFFEFFFB)
-      ),
+          fontFamily: 'RinsHandwriting',
+          colorScheme: ColorScheme.light(
+            primary: Color(0xFF262626), // Black
+            onPrimary: Colors.white,
+            // background: Color(0xFFFEFFFB), // White
+            // onBackground: Color(0xFF262626), // Black text on white background
+          ),
+          scaffoldBackgroundColor: Color(0xFFFEFFFB)),
 
       initialRoute: '/',
       routes: {
@@ -81,10 +88,10 @@ class MainPage extends StatelessWidget {
             ),
           ),
 
-           // Settings icon replaced with specific image
+          // Settings icon replaced with specific image
           Positioned(
             left: 20,
-            bottom:20,
+            bottom: 20,
             child: IconButton(
               icon: Image.asset('assets/icon/settings-icon.png', height: 75),
               onPressed: () => _navigateToSettings(context),
@@ -109,7 +116,8 @@ class MainPage extends StatelessWidget {
                         ),
                       ),
                       CircleAvatar(
-                        backgroundImage: AssetImage('assets/icon/profile-icon.png'),
+                        backgroundImage:
+                            AssetImage('assets/icon/profile-icon.png'),
                         radius: 20,
                       ),
                     ],
@@ -128,15 +136,15 @@ class MainPage extends StatelessWidget {
                     ),
                     child: const SizedBox(
                       child: Center(
-                      child: Text(
-                        "TRASH CLASSIFIER",
-                        style: TextStyle(
-                          fontFamily: 'Simpsonfont',
-                          fontSize: 35,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
+                        child: Text(
+                          "TRASH CLASSIFIER",
+                          style: TextStyle(
+                            fontFamily: 'Simpsonfont',
+                            fontSize: 35,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                          ),
                         ),
-                      ),
                       ),
                     ),
                   ),
@@ -144,7 +152,6 @@ class MainPage extends StatelessWidget {
                   _buildButton("Waste Overview", context, '/overview_page'),
                   _buildButton("Tips/Fun facts", context, '/funfact_page'),
                   const Spacer(),
-
                 ],
               ),
             ),
@@ -155,16 +162,17 @@ class MainPage extends StatelessWidget {
   }
 }
 
-  void _navigateToSettings(BuildContext context) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => SettingsPage()),
-    );
-  }
+void _navigateToSettings(BuildContext context) {
+  Navigator.push(
+    context,
+    MaterialPageRoute(builder: (context) => SettingsPage()),
+  );
+}
 
 Widget _buildButton(String text, BuildContext context, [String? route]) {
   return Padding(
-    padding: const EdgeInsets.symmetric(vertical: 16.0), // Increased vertical padding
+    padding: const EdgeInsets.symmetric(
+        vertical: 16.0), // Increased vertical padding
     child: SizedBox(
       width: double.infinity,
       height: 80, // Increased height for larger buttons
@@ -186,7 +194,8 @@ Widget _buildButton(String text, BuildContext context, [String? route]) {
             // Center the text with increased padding
             Center(
               child: Padding(
-                padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 24.0), // Increased padding
+                padding: const EdgeInsets.symmetric(
+                    vertical: 16.0, horizontal: 24.0), // Increased padding
                 child: Text(
                   text,
                   style: const TextStyle(
@@ -203,5 +212,3 @@ Widget _buildButton(String text, BuildContext context, [String? route]) {
     ),
   );
 }
-
-

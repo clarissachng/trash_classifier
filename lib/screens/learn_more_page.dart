@@ -1,7 +1,7 @@
 import 'package:ai_powered_trash_classifier/screens/scan_page.dart';
 import 'package:flutter/material.dart';
-import '../widget/drawer_menu.dart'; // Import the drawer menu
-import '../widget/settings_page.dart'; // Import the settings page
+import '../widgets/drawer_menu.dart'; // Import the drawer menu
+import '../widgets/settings_page.dart'; // Import the settings page
 
 class LearnMorePage extends StatelessWidget {
   final String scannedItem; // Add a parameter for the scanned item

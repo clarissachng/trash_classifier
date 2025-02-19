@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
 import 'learn_more_page.dart';
-import '../widget/drawer_menu.dart';
-import '../widget/settings_page.dart';
+import '../widgets/drawer_menu.dart';
+import '../widgets/settings_page.dart';
 
 class ScanPage extends StatefulWidget {
   const ScanPage({super.key});

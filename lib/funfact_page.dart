@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../widget/drawer_menu.dart';
-import '../widget/settings_page.dart';
+import 'widgets/drawer_menu.dart';
+import 'widgets/settings_page.dart';
 
 void main() {
   runApp(Funfact());
